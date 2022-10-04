@@ -1,4 +1,4 @@
-function mediaFactory(data){
+export function mediaFactory(data){
     const { name, id, photographerId, title, image, likes, date, price } = data;
     const mediaPicture = `assets/images/${name}/${image}`
        
