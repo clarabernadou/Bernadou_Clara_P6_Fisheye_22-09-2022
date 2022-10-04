@@ -1,4 +1,5 @@
 import { getPhotographers } from "../utils/helper.js";
+import { photographerFactory } from "../factories/photographer.js";
 
 getPhotographers();
 
