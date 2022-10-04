@@ -9,29 +9,61 @@
   </head>
   <body>
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <img src="assets/images/logo.png" class="logo" alt="Photo de Fisheye"/>
     </header>
     <main id="main">
-      <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+      <div class="photograph-header" aria-label="En-tête de la page">
+        <button class="contact_button" onclick="displayModal()" aria-label="Envoyer un message">Contactez-moi</button>
       </div>
     </main>
-    <div id="contact_modal">
+    <div id="contact_modal" aria-label="Modal de contact">
 			<div class="modal">
 				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <p class="confirmMsg">Votre message a été envoyé.</p>
+          <h2 class="contactezMoi">Contactez-moi</h2>
+          <img src="assets/icons/close.svg" onclick="closeModal()" aria-label="Fermer" />
         </header>
 				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
+					<div class="formData">
+	          <label>Prénom</label>
+						<input 
+            aria-label="Entrer votre prénom ici"
+            class="text-control"
+            type="firstName"
+            id="first"
+            name="firstName" />
+          </div>
+          <div class="formData">
+            <label>Nom</label>
+						<input 
+            aria-label="Entrer votre nom ici"
+            class="text-control"
+            type="lastName"
+            id="last"
+            name="lastName" />
+          </div>
+          <div class="formData"> 
+            <label>Email</label>
+						<input 
+            aria-label="Entrer votre email ici"
+            class="text-control"
+            type="email"
+            id="email"
+            name="email" />
+          </div>
+          <div class="formData">
+            <label>Votre message</label>
+						<input 
+            class="text-control yourMessageInput"
+            type="textarea"
+            id="yourMessage"
+            name="message" />
 					</div>
-          <button class="contact_button">Envoyer</button>
+          <button class="contact_button" id="send-button" aria-label="Envoyer">Envoyer</button>
 				</form>
 			</div>
 		</div>
-    <script src="/scripts/pages/photographer.js"></script>
+    <script src="/scripts/pages/photographer.js" type="module"></script>
     <script src="/scripts/utils/contactForm.js"></script>
   </body>
 </html>
