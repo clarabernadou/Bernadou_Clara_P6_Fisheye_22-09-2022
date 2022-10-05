@@ -4,19 +4,57 @@
 
 .photograph-header {
     background-color: #FAFAFA;
-    height: 300px;
     margin: 0 100px;
 }
 
 /* Modifs here */
 
+.photograph-header aside {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3em;
+}
+
+@media screen and (max-width: 1005px){
+    .photograph-header aside {
+        flex-direction: column-reverse;
+    }
+}
+
+.photograph-header section {
+    margin: 1em;
+}
+
 .photograph-header h2 {
     color: #D3573C;
+    font-family: DM Sans;
+    font-size: 64px;
+    font-weight: 400;
+    line-height: 83px;
+    margin: 0;
 }
 
 .photograph-header h3 {
     color: #901C1C;
-    margin-bottom: 1em;
+    font-family: DM Sans;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 31px;
+    margin: 0;
+    margin-bottom: 19px;
+}
+
+.photograph-header h4 {
+    font-family: DM Sans;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 23px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #525252;
+    margin: 0;
 }
 
 .photograph-header img{
@@ -24,13 +62,6 @@
     height: 10em;
     width: 10em;
     object-fit: cover;
-}
-
-.photograph-header aside {
-    display: flex;
-    justify-content: space-between;
-    padding: 2em;
-    align-items: center;
 }
 
 .formData[data-error]::after {
