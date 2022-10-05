@@ -26,6 +26,13 @@
     object-fit: cover;
 }
 
+.photograph-header aside {
+    display: flex;
+    justify-content: space-between;
+    padding: 2em;
+    align-items: center;
+}
+
 .formData[data-error]::after {
     content: attr(data-error);
     font-size: 20px;
