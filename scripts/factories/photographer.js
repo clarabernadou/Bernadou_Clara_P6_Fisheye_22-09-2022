@@ -2,6 +2,7 @@ export function photographerFactory(data) {
     const { name, portrait, tagline, city, price, country, id, likes } = data;
     const picture = `assets/photographers/${portrait}`;
 
+    // Display photographers card in main page
     function getUserCardDOM() {
         const article = document.createElement( 'article' );
         const img = document.createElement( 'img' );
@@ -10,6 +11,8 @@ export function photographerFactory(data) {
         const h4 = document.createElement( 'h4' );
         const p = document.createElement( 'p' );
         const a = document.createElement( 'a' );
+
+    // -------------------------------------------------------------------------
         
         a.setAttribute("href", "/photographer.html"+"?"+`id=${id}`)
         img.setAttribute("src", picture)
@@ -18,6 +21,8 @@ export function photographerFactory(data) {
         h3.textContent = city + ", " + country;
         h4.textContent = tagline;
         p.textContent = price + "€/jour";
+
+    // -------------------------------------------------------------------------
 
         a.appendChild(article);
         article.appendChild(img);
@@ -28,23 +33,50 @@ export function photographerFactory(data) {
         return (a);
     }
 
+    // Display photograph header in photograph page
     function getPhotographCardDOM() {
         const aside = document.createElement( 'aside' );
-        const img = document.createElement( 'img' );
+        const section = document.createElement( 'section' );
         const h2 = document.createElement( 'h2' );
         const h3 = document.createElement( 'h3' );
         const h4 = document.createElement( 'h4' );
+        const sectionBtn = document.createElement( 'section' );
+        const btn = document.createElement( 'button' );
+        const sectionImg = document.createElement( 'section' );
+        const img = document.createElement( 'img' );
 
-        img.setAttribute("src", picture);
-        img.setAttribute("alt", `Photo du photographe ${name}`);
+    // -------------------------------------------------------------------------
+
+        // Section text
         h2.textContent = name;
         h3.textContent = city + ", " + country;
         h4.textContent = tagline;
+        
+        // Section btn
+        btn.textContent = "Contactez-moi";
+        btn.setAttribute("class", "contact_button");
+        btn.setAttribute("onclick", "displayModal()");
+        btn.setAttribute("aria-label", "Envoyer un message");
 
-        aside.appendChild(img);
-        aside.appendChild(h2);
-        aside.appendChild(h3);
-        aside.appendChild(h4);
+        // Section Img
+        img.setAttribute("src", picture);
+        img.setAttribute("alt", `Photo du photographe ${name}`);
+        
+    // -------------------------------------------------------------------------
+
+        // Display text
+        aside.appendChild(section);
+        section.appendChild(h2);
+        section.appendChild(h3);
+        section.appendChild(h4); 
+
+        // Display btn
+        aside.appendChild(sectionBtn);
+        sectionBtn.appendChild(btn);
+
+        // Display Img
+        aside.appendChild(sectionImg);
+        sectionImg.appendChild(img);
         return (aside);
     }
 
@@ -53,8 +85,12 @@ export function photographerFactory(data) {
         const p = document.createElement( 'p' );
         const p1 = document.createElement( 'p' );
 
+    // -------------------------------------------------------------------------
+
         p.textContent = price + "€/jour";
         p1.textContent = likes + "icon";
+
+    // -------------------------------------------------------------------------
 
         aside.appendChild(p);
         aside.appendChild(p1);
