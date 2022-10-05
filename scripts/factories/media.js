@@ -3,7 +3,7 @@ export function mediaFactory(data){
     const mediaPicture = `assets/images/${name}/${image}`
        
     function getMediasCardDOM(){
-        const aside = document.createElement( 'aside' );
+        const article = document.createElement( 'article' );
         const img = document.createElement( 'img' );
         const h2 = document.createElement( 'h2' );
         const p = document.createElement( 'p' );
@@ -13,10 +13,10 @@ export function mediaFactory(data){
         h2.textContent = title;
         p.textContent = likes;
 
-        aside.appendChild(img);
-        aside.appendChild(h2);
-        aside.appendChild(p);
-        return (aside);
+        article.appendChild(img);
+        article.appendChild(h2);
+        article.appendChild(p);
+        return (article);
     }
     return { id, photographerId, title, image, likes, date, price, getMediasCardDOM }
 };

@@ -19,10 +19,10 @@ async function init(){
     }
 
     async function displayMediaData(myMedia){
-        const photographHeader = document.querySelector(".photograph-header");
+        const photographGallery = document.querySelector(".photograph-gallery");
         const mediaModel = mediaFactory(myMedia);
         const mediaCardDOM = mediaModel.getMediasCardDOM();
-        photographHeader.appendChild(mediaCardDOM);
+        photographGallery.appendChild(mediaCardDOM);
     }
 
     displayPhotographerData(photographer);
