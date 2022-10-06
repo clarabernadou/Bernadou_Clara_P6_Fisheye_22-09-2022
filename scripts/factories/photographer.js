@@ -1,5 +1,5 @@
 export function photographerFactory(data) {
-    const { name, portrait, tagline, city, price, country, id, likes } = data;
+    const { name, portrait, tagline, city, price, country, id } = data;
     const picture = `assets/photographers/${portrait}`;
 
     // Display photographers card in main page
@@ -79,23 +79,33 @@ export function photographerFactory(data) {
         sectionImg.appendChild(img);
         return (aside);
     }
-
+    
     function getFrameDOM() {
+        
+
         const aside = document.createElement( 'aside' );
         const p = document.createElement( 'p' );
-        const p1 = document.createElement( 'p' );
+        const i = document.createElement( 'icon' )
 
     // -------------------------------------------------------------------------
 
+        aside.setAttribute('class', 'frame')
         p.textContent = price + "€/jour";
-        p1.textContent = likes + "icon";
 
     // -------------------------------------------------------------------------
-
+    
         aside.appendChild(p);
-        aside.appendChild(p1);
         return (aside);
     }
 
-    return { name, picture, city, tagline, price, country, id, getUserCardDOM, getPhotographCardDOM, getFrameDOM }
+    // Display name in form contact
+    function getNameContact() {
+        const h2 = document.createElement( 'h2' );
+
+        h2.textContent = "Contactez-moi " + name;
+
+        return(h2);
+    }
+
+    return { name, picture, city, tagline, price, country, id, getUserCardDOM, getPhotographCardDOM, getFrameDOM, getNameContact }
 };

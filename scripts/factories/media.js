@@ -1,22 +1,24 @@
-export function mediaFactory(data){
-    const { name, id, photographerId, title, image, likes, date, price } = data;
-    const mediaPicture = `assets/images/${name}/${image}`
-       
-    function getMediasCardDOM(){
-        const article = document.createElement( 'article' );
-        const img = document.createElement( 'img' );
-        const h2 = document.createElement( 'h2' );
-        const p = document.createElement( 'p' );
+export function mediaFactory(dataMedia) {
+    const { img, title, likes } = dataMedia;
 
-        img.setAttribute("src", mediaPicture);
-        img.setAttribute("alt", `Image ${title} prise par ${name}`);
-        h2.textContent = title;
-        p.textContent = likes;
+    function getMediasCardDOM(){
+        const article = document.createElement( "article" );
+        const div = document.createElement( "div" );
+        const img = document.createElement( "img" );
+        const p = document.createElement( "p" );
+        const p1 = document.createElement( "p" );
+
+        div.setAttribute('class', 'infoMedia');
+        p.textContent = "Voici une description en attendant";
+        p1.setAttribute('class', 'likes');
+        p1.textContent = 13;
 
         article.appendChild(img);
-        article.appendChild(h2);
-        article.appendChild(p);
+        article.appendChild(div);
+        div.appendChild(p);
+        div.appendChild(p1);
         return (article);
     }
-    return { id, photographerId, title, image, likes, date, price, getMediasCardDOM }
+
+    return { img, title, likes, getMediasCardDOM }
 };
