@@ -3,7 +3,7 @@ const modal = document.getElementById("contact_modal");
 const sendBtn = document.getElementById("send-button");
 const form = document.querySelector('form');
 const confirmMsg = document.querySelector('.confirmMsg');
-const contactezMoi = document.querySelector('.contactezMoi')
+const contactezMoi = document.querySelector('.contactezMoi');
 
 const first = document.getElementById('first');
 const last = document.getElementById('last');
@@ -27,6 +27,7 @@ function openConfirmMsg(){
     form.style.display = "none";
     confirmMsg.style.display = "block";
     contactezMoi.style.display = "none";
+    
 };
 
 // error messages

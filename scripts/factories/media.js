@@ -1,22 +1,24 @@
-export function mediaFactory(data){
-    const { name, id, photographerId, title, image, likes, date, price } = data;
-    const mediaPicture = `assets/images/${name}/${image}`
-       
+export function mediaFactory(dataMedia) {
+    const { img, title, likes } = dataMedia;
+
     function getMediasCardDOM(){
-        const aside = document.createElement( 'aside' );
-        const img = document.createElement( 'img' );
-        const h2 = document.createElement( 'h2' );
-        const p = document.createElement( 'p' );
+        const article = document.createElement( "article" );
+        const div = document.createElement( "div" );
+        const img = document.createElement( "img" );
+        const p = document.createElement( "p" );
+        const p1 = document.createElement( "p" );
 
-        img.setAttribute("src", mediaPicture);
-        img.setAttribute("alt", `Image ${title} prise par ${name}`);
-        h2.textContent = title;
-        p.textContent = likes;
+        div.setAttribute('class', 'infoMedia');
+        p.textContent = "Voici une description en attendant";
+        p1.setAttribute('class', 'likes');
+        p1.textContent = 13;
 
-        aside.appendChild(img);
-        aside.appendChild(h2);
-        aside.appendChild(p);
-        return (aside);
+        article.appendChild(img);
+        article.appendChild(div);
+        div.appendChild(p);
+        div.appendChild(p1);
+        return (article);
     }
-    return { id, photographerId, title, image, likes, date, price, getMediasCardDOM }
+
+    return { img, title, likes, getMediasCardDOM }
 };
