@@ -19,18 +19,33 @@ async function init(){
     }
 
     async function displayMediaData(myMedia){
-        const photographHeader = document.querySelector(".photograph-header");
+        const photographGallery = document.querySelector(".photograph-gallery");
         const mediaModel = mediaFactory(myMedia);
         const mediaCardDOM = mediaModel.getMediasCardDOM();
-        photographHeader.appendChild(mediaCardDOM);
+        photographGallery.appendChild(mediaCardDOM);
+    }
+
+    async function displayFrameData(photographer){
+        const photographGallery = document.querySelector(".photograph-gallery");
+        const frameModel = photographerFactory(photographer);
+        const frameCardDOM = frameModel.getFrameDOM();
+        photographGallery.appendChild(frameCardDOM);
+    }
+
+    async function displayNameContact(photographer){
+        const contactName = document.querySelector(".contactezMoi");
+        const contactModel = photographerFactory(photographer);
+        const contactNameDOM = contactModel.getNameContact();
+        contactName.appendChild(contactNameDOM);
     }
 
     displayPhotographerData(photographer);
     displayMediaData(myMedia);
+    displayFrameData(photographer);
+    displayNameContact(photographer);
+    console.log(myMedia);
 }
 
 init();
-
-
 
 
