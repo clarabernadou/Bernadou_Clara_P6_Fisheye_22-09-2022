@@ -1,5 +1,6 @@
-export function mediaFactory(dataMedia) {
-    const { img, title, likes } = dataMedia;
+export function mediaFactory(data) {
+    const { image, title, likes } = data;
+    const picture = `assets/images/${image}`;
 
     function getMediasCardDOM(){
         const article = document.createElement( "article" );
@@ -8,10 +9,12 @@ export function mediaFactory(dataMedia) {
         const p = document.createElement( "p" );
         const p1 = document.createElement( "p" );
 
+        img.setAttribute("src", picture);
+        img.setAttribute("alt", `image ${title}`);
         div.setAttribute('class', 'infoMedia');
-        p.textContent = "Voici une description en attendant";
+        p.textContent = title;
         p1.setAttribute('class', 'likes');
-        p1.textContent = 13;
+        p1.textContent = likes;
 
         article.appendChild(img);
         article.appendChild(div);
@@ -20,5 +23,5 @@ export function mediaFactory(dataMedia) {
         return (article);
     }
 
-    return { img, title, likes, getMediasCardDOM }
+    return { image, title, likes, getMediasCardDOM }
 };
