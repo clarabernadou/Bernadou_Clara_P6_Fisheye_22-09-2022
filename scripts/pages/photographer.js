@@ -20,9 +20,11 @@ async function init(){
 
     async function displayMediaData(myMedia){
         const photographGallery = document.querySelector(".photograph-gallery");
-        const mediaModel = mediaFactory(myMedia);
-        const mediaCardDOM = mediaModel.getMediasCardDOM();
-        photographGallery.appendChild(mediaCardDOM);
+        myMedia.forEach((myMedia) => {
+            const mediaModel = mediaFactory(myMedia);
+            const mediaCardDOM = mediaModel.getMediasCardDOM();
+            photographGallery.appendChild(mediaCardDOM);
+        })
     }
 
     async function displayFrameData(photographer){

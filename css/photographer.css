@@ -179,6 +179,9 @@ form input {
 
 .photograph-gallery {
     margin: 100px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 article {
@@ -189,13 +192,18 @@ article {
 
 article img{
     height: 300px;
-    margin-bottom: 10px;
+    object-fit: cover;
 }
 
 .infoMedia {
     display: flex;
-    flex-direction: row;
     align-items: center;
+    justify-content: space-between;
+    margin: 10px 0 30px 0;
+}
+
+.infoMedia p {
+    margin: 0;
 }
 
 article p {
