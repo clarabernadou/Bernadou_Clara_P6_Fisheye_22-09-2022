@@ -184,7 +184,8 @@ form input {
 .photograph-gallery {
     margin: 100px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 7%;
     flex-wrap: wrap;
 }
 
@@ -197,6 +198,12 @@ article {
 }
 
 article img{
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
+}
+
+article video{
     height: 300px;
     width: 100%;
     object-fit: cover;
