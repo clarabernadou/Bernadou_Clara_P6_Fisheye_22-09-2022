@@ -11,6 +11,8 @@ async function init(){
     let photographer = photographers.find(p => p.id == photographerId);
     let myMedia = media.filter(m => m.photographerId == photographerId);
 
+    //let myMediaId = myMedia.find(m => m.id);
+
     // Display a photograph in header
     async function displayPhotographerData(photographer){
         const photographHeader = document.querySelector(".photograph-header");
@@ -49,12 +51,16 @@ async function init(){
     async function lightboxMedia(){
         const lightbox = document.querySelector(".lightbox");
         const links = document.querySelectorAll("a");
-        console.log(links);
         
         for(let link of links){
             link.addEventListener("click", function(e){
                 e.preventDefault();
                 lightbox.show()
+                    myMedia.forEach((myMedia) => {
+                        const mediaModel = mediaFactory(myMedia);
+                        const mediaCardDOM = mediaModel.lightbox();
+                        lightbox.appendChild(mediaCardDOM);
+                    });
             });
         }
     };

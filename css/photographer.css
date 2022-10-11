@@ -184,7 +184,7 @@ form input {
 .photograph-gallery {
     margin: 100px;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     gap: 7%;
     flex-wrap: wrap;
 }
@@ -221,15 +221,29 @@ article video{
 }
 
 article p {
-    color: #901C1C;
     font-size: 24px;
     line-height: 31.25px;
     font-weight: 400;
 }
 
-.likes {
-    color: black;
+.div__likes{
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
+
+.div__likes p{
+    font-size: 16px;
+}
+
+.div__likes i{
+    color: #901C1C;
+}
+
+.div__likes:active{
+    color: #901C1C;
+    font-weight: bold;
+}   
 
 /* LIGHTBOX */
 
@@ -239,11 +253,42 @@ article p {
     height: 100%;
     top: 0;
     left: 0;
-    position: fixed;
     background-color: white;
+    position: fixed;
+    border: none;
+    padding: 0;
+}
+
+.lightbox article {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: 3em;
+    color: #901C1C;
+}
+
+.fa-times {
+    text-align: end;
+    width: 100%;
+}
+
+.align__icon {
+    display: flex;
+    align-items: center;
+}
+
+.img-video {
+    margin: 1em;
 }
 
 .lightbox img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.lightbox video {
     width: 100%;
     object-fit: cover;
 }
