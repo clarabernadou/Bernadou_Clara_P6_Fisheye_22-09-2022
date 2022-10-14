@@ -59,6 +59,29 @@
     width: 10em;
     object-fit: cover;
 }
+/* GALLERY FILTER */
+.photograph-filter {
+    margin: 20px 100px;
+}
+.photograph-filter label {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.open-option {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    padding: 11px;
+    width: 170px;
+    height: 69px;
+    border: none;
+    background-color: #901C1C;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* FRAME IN PAGE BOTTOM */
 
 .frame {
     display: flex;
@@ -75,6 +98,8 @@
 .frame p {
     font-size: 24px;
 }
+
+/* FORM CONTACT */
 
 #contact_modal {
     display: none;
@@ -182,7 +207,7 @@ form input {
 /* PHOTOGRAPHER'S GALLERY */
 
 .photograph-gallery {
-    margin: 100px;
+    margin: 0 100px;
     display: flex;
     justify-content: space-around;
     gap: 7%;
@@ -272,11 +297,13 @@ article p {
 .fa-times {
     text-align: end;
     width: 100%;
+    margin-right: 2em;
 }
 
 .align__icon {
     display: flex;
     align-items: center;
+    margin: 1em;
 }
 
 .img-video {
@@ -286,10 +313,14 @@ article p {
 .lightbox img {
     width: 100%;
     object-fit: cover;
+    width: 100%;
+    height: 19em;
 }
 
 .lightbox video {
     width: 100%;
     object-fit: cover;
+    width: 100%;
+    height: 19em;
 }
 

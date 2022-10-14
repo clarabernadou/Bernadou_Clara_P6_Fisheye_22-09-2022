@@ -1,5 +1,5 @@
 export function mediaFactory(data) {
-    const { image, video, title, likes } = data;
+    const { image, video, title, likes, date } = data;
     const picture = `assets/images/${image}`;
     const playVideo = `assets/images/${video}`
 
@@ -16,6 +16,7 @@ export function mediaFactory(data) {
 
         // All card
         article.setAttribute("class", "article-photo");
+        a.setAttribute('onclick', 'openLightbox()')
 
         if(image){
             const img = document.createElement( "img" );
@@ -36,7 +37,7 @@ export function mediaFactory(data) {
         p1.setAttribute('class', 'likes');
         p1.textContent = likes;
         i.setAttribute('class', 'fas fa-heart');
-
+        i.setAttribute('onclick', `likePhoto(${data.likes})`);
     // -------------------------------------------------------------------------
         article.appendChild(a);
         article.appendChild(div);
@@ -58,10 +59,13 @@ export function mediaFactory(data) {
 
     // -------------------------------------------------------------------------
 
+        article.setAttribute('class', 'slide');
         close.setAttribute('class', 'fas fa-times');
-        div.setAttribute('class', 'align__icon')
+        close.setAttribute('onclick', 'closeLightbox()');
+        div.setAttribute('class', 'align__icon');
         prev.setAttribute('class', 'fas fa-chevron-left');
-        divImgVideo.setAttribute('class', 'img-video')
+        //prev.setAttribute('onclick', 'changeSlide()')
+        divImgVideo.setAttribute('class', 'img-video');
 
         if(image){
             const img = document.createElement( "img" );
@@ -74,6 +78,7 @@ export function mediaFactory(data) {
         }
 
         next.setAttribute('class', 'fas fa-chevron-right');
+        //next.setAttribute('onclick', 'toSlide()');
 
     // -------------------------------------------------------------------------
 
@@ -85,5 +90,38 @@ export function mediaFactory(data) {
         return(article)
     }
 
-    return { image, video, title, likes, getMediasCardDOM, lightbox }
+    function filterBtn() {
+        const label = document.createElement( 'label' );
+        const select = document.createElement( 'select' );
+        const popularityBtn = document.createElement( 'option' );
+        const dateBtn = document.createElement( 'option' );
+        const titleBtn = document.createElement( 'option' );
+    // -------------------------------------------------------------------------
+        label.setAttribute('for', 'filter');
+        label.textContent = "Trier par ";
+
+        select.setAttribute('name', 'filter');
+        select.setAttribute('class', 'open-option');
+
+        popularityBtn.setAttribute('value', 'Popularité');
+        popularityBtn.textContent = "Popularité";
+        popularityBtn.setAttribute('onclick', 'popularity()');
+
+        dateBtn.setAttribute('value', 'Date');
+        dateBtn.textContent = "Date";
+        dateBtn.setAttribute('onclick', 'date()');
+
+        titleBtn.setAttribute('value', 'Titre');
+        titleBtn.textContent = "Titre";
+        titleBtn.setAttribute('onclick', 'title()');
+    // -------------------------------------------------------------------------      
+        label.appendChild(select);
+        select.appendChild(popularityBtn);
+        select.appendChild(dateBtn);
+        select.appendChild(titleBtn);  
+        
+        return(label);
+    }
+
+    return { image, video, title, likes, date, getMediasCardDOM, lightbox, filterBtn }
 };
