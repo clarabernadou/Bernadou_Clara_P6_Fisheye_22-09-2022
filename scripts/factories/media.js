@@ -70,12 +70,10 @@ export function mediaFactory(data) {
         if(image){
             const img = document.createElement( "img" );
             img.setAttribute("src", picture);
-            img.setAttribute(`lightboxMedia(${data.image})`);
             divImgVideo.appendChild(img);
         }else{
             const video = document.createElement( "video" );
             video.setAttribute("src", playVideo);
-            img.setAttribute(`lightboxMedia(${data.video})`);
             divImgVideo.appendChild(video);
         }
 

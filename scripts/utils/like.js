@@ -1,6 +1,13 @@
 function likePhoto(data){
-    let counter = data; 
+    const likeCount = document.querySelector(".likes")
+    let hasClicked = false;
+    let counter = data;
     const add = counter + 1;
-    const likeCount = document.querySelector(".likes").textContent = add;
-    console.log(likeCount);
+
+    if(!hasClicked){
+        likeCount.textContent = add;
+        hasClicked = true;
+        
+        console.log(likeCount);
+    }
 }

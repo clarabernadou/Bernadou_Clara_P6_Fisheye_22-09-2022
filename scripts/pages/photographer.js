@@ -10,9 +10,6 @@ async function init(){
     const { photographers, media } = await getPhotographers();
     let photographer = photographers.find(p => p.id == photographerId);
     let myMedia = media.filter(m => m.photographerId == photographerId);
-    let mediaId = media.find(m => m.id);
-
-    console.log(mediaId);
 
     // Display a photograph in header
     async function displayPhotographerData(photographer){
@@ -56,7 +53,7 @@ async function init(){
         for(let link of links){
             link.addEventListener("click", function(e){
                 e.preventDefault();
-                    const mediaModel = mediaFactory(myMedia.data);
+                    const mediaModel = mediaFactory(myMedia);
                     const mediaCardDOM = mediaModel.lightbox();
                     lightbox.appendChild(mediaCardDOM);
             });
@@ -75,7 +72,7 @@ async function init(){
     displayMediaData(myMedia);
     displayFrameData(photographer);
     displayNameContact(photographer);
-    lightboxMedia(myMedia.data);
+    lightboxMedia(myMedia);
     
     console.log(myMedia);
 }
