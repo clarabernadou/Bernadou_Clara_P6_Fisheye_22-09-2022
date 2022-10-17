@@ -49,17 +49,26 @@ async function init(){
     async function lightboxMedia(){
         const lightbox = document.querySelector(".lightbox");
         const links = document.querySelectorAll("a");
-        console.log(links);
         
         for(let link of links){
             link.addEventListener("click", function(e){
                 e.preventDefault();
-                lightbox.show()
+                    const mediaModel = mediaFactory(myMedia);
+                    const mediaCardDOM = mediaModel.lightbox();
+                    lightbox.appendChild(mediaCardDOM);
             });
         }
     };
 
+    async function Filter(){
+        const photographFilter = document.querySelector(".photograph-filter");
+        const btnModel = mediaFactory(myMedia);
+        const btnFilterDOM = btnModel.filterBtn();
+        photographFilter.appendChild(btnFilterDOM);
+    }
+
     displayPhotographerData(photographer);
+    Filter(myMedia)
     displayMediaData(myMedia);
     displayFrameData(photographer);
     displayNameContact(photographer);
