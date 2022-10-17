@@ -5,3 +5,11 @@ function openLightbox() {
 function closeLightbox() {
   document.querySelector('.lightbox').style.display = 'none';
 }
+
+function next(){
+  console.log("next")
+}
+
+function prev(){
+  console.log("prev")
+}
