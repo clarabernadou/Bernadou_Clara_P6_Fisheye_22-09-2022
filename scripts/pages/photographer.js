@@ -56,7 +56,7 @@ async function init(){
         for(let link of links){
             link.addEventListener("click", function(e){
                 e.preventDefault();
-                    const mediaModel = mediaFactory(mediaId);
+                    const mediaModel = mediaFactory(myMedia.data);
                     const mediaCardDOM = mediaModel.lightbox();
                     lightbox.appendChild(mediaCardDOM);
             });
@@ -75,7 +75,7 @@ async function init(){
     displayMediaData(myMedia);
     displayFrameData(photographer);
     displayNameContact(photographer);
-    lightboxMedia(mediaId);
+    lightboxMedia(myMedia.data);
     
     console.log(myMedia);
 }
