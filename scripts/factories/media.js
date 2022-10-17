@@ -64,7 +64,7 @@ export function mediaFactory(data) {
         close.setAttribute('onclick', 'closeLightbox()');
         div.setAttribute('class', 'align__icon');
         prev.setAttribute('class', 'fas fa-chevron-left');
-        //prev.setAttribute('onclick', 'changeSlide()')
+        prev.setAttribute('onclick', 'prev()')
         divImgVideo.setAttribute('class', 'img-video');
 
         if(image){
@@ -78,7 +78,7 @@ export function mediaFactory(data) {
         }
 
         next.setAttribute('class', 'fas fa-chevron-right');
-        //next.setAttribute('onclick', 'toSlide()');
+        next.setAttribute('onclick', 'next()');
 
     // -------------------------------------------------------------------------
 

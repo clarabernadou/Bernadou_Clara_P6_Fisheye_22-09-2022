@@ -49,18 +49,23 @@ async function init(){
     async function lightboxMedia(){
         const lightbox = document.querySelector(".lightbox");
         const links = document.querySelectorAll("a");
-        
-        for(let link of links){
-            link.addEventListener("click", function(e){
-                e.preventDefault();
-                    const mediaModel = mediaFactory(myMedia);
-                    const mediaCardDOM = mediaModel.lightbox();
-                    lightbox.appendChild(mediaCardDOM);
-            });
-        }
+
+        const images = Array.from(document.querySelectorAll(".article-photo img"));
+        const image = images.find(i => i);
+        console.log(images)
+        console.log(image)
+
+            for(let link of links){
+                link.addEventListener("click", function(e){
+                   e.preventDefault();
+                        const mediaModel = mediaFactory(image);
+                        const mediaCardDOM = mediaModel.lightbox();
+                        lightbox.appendChild(mediaCardDOM);
+                });
+            };
     };
 
-    async function Filter(){
+    async function filter(){
         const photographFilter = document.querySelector(".photograph-filter");
         const btnModel = mediaFactory(myMedia);
         const btnFilterDOM = btnModel.filterBtn();
@@ -68,13 +73,13 @@ async function init(){
     }
 
     displayPhotographerData(photographer);
-    Filter(myMedia)
+    filter(myMedia)
     displayMediaData(myMedia);
     displayFrameData(photographer);
     displayNameContact(photographer);
-    lightboxMedia(myMedia);
-    
-    console.log(myMedia);
+    lightboxMedia();
+
+    console.log(myMedia)
 }
 
 init();
