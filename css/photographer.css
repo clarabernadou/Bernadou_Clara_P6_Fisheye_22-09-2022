@@ -59,6 +59,29 @@
     width: 10em;
     object-fit: cover;
 }
+/* GALLERY FILTER */
+.photograph-filter {
+    margin: 20px 100px;
+}
+.photograph-filter label {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.open-option {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    padding: 11px;
+    width: 170px;
+    height: 69px;
+    border: none;
+    background-color: #901C1C;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* FRAME IN PAGE BOTTOM */
 
 .frame {
     display: flex;
@@ -75,6 +98,8 @@
 .frame p {
     font-size: 24px;
 }
+
+/* FORM CONTACT */
 
 #contact_modal {
     display: none;
@@ -182,9 +207,9 @@ form input {
 /* PHOTOGRAPHER'S GALLERY */
 
 .photograph-gallery {
-    margin: 100px;
+    margin: 0 100px;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     gap: 7%;
     flex-wrap: wrap;
 }
@@ -221,15 +246,29 @@ article video{
 }
 
 article p {
-    color: #901C1C;
     font-size: 24px;
     line-height: 31.25px;
     font-weight: 400;
 }
 
-.likes {
-    color: black;
+.div__likes{
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
+
+.div__likes p{
+    font-size: 16px;
+}
+
+.div__likes i{
+    color: #901C1C;
+}
+
+.div__likes:active{
+    color: #901C1C;
+    font-weight: bold;
+}   
 
 /* LIGHTBOX */
 
@@ -239,12 +278,49 @@ article p {
     height: 100%;
     top: 0;
     left: 0;
-    position: fixed;
     background-color: white;
+    position: fixed;
+    border: none;
+    padding: 0;
+}
+
+.lightbox article {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: 3em;
+    color: #901C1C;
+}
+
+.fa-times {
+    text-align: end;
+    width: 100%;
+    margin-right: 2em;
+}
+
+.align__icon {
+    display: flex;
+    align-items: center;
+    margin: 1em;
+}
+
+.img-video {
+    margin: 1em;
 }
 
 .lightbox img {
     width: 100%;
     object-fit: cover;
+    width: 100%;
+    height: 19em;
+}
+
+.lightbox video {
+    width: 100%;
+    object-fit: cover;
+    width: 100%;
+    height: 19em;
 }
 
