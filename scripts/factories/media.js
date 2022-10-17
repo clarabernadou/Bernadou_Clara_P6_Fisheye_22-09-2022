@@ -34,14 +34,14 @@ export function mediaFactory(data) {
         div.setAttribute('class', 'infoMedia');
         p.textContent = title;
         div1.setAttribute('class', 'div__likes')
+        div1.setAttribute('onclick', `likePhoto(${data.likes})`);
         p1.setAttribute('class', 'likes');
         p1.textContent = likes;
         i.setAttribute('class', 'fas fa-heart');
-        i.setAttribute('onclick', `likePhoto(${data.likes})`);
     // -------------------------------------------------------------------------
         article.appendChild(a);
         article.appendChild(div);
-        div.appendChild(p);
+        div.appendChild(p); 
         div.appendChild(div1);
         div1.appendChild(p1);
         div1.appendChild(i);
@@ -70,10 +70,12 @@ export function mediaFactory(data) {
         if(image){
             const img = document.createElement( "img" );
             img.setAttribute("src", picture);
+            img.setAttribute(`lightboxMedia(${data.image})`);
             divImgVideo.appendChild(img);
         }else{
             const video = document.createElement( "video" );
             video.setAttribute("src", playVideo);
+            img.setAttribute(`lightboxMedia(${data.video})`);
             divImgVideo.appendChild(video);
         }
 
