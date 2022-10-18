@@ -1,4 +1,4 @@
-function popularity(myMedia){
+function popularity(){
     const photographGallery = document.querySelector(".photograph-gallery");
     let popularityFilter = myMedia.sort((l1, l2) => (l1.likes < l2.likes) ? 1 : (l1.likes > l2.likes) ? -1 : 0);
 
