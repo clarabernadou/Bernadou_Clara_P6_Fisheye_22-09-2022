@@ -96,7 +96,9 @@ export function mediaFactory(data) {
         const popularityBtn = document.createElement( 'option' );
         const dateBtn = document.createElement( 'option' );
         const titleBtn = document.createElement( 'option' );
+        
     // -------------------------------------------------------------------------
+
         label.setAttribute('for', 'filter');
         label.textContent = "Trier par ";
 
@@ -114,7 +116,9 @@ export function mediaFactory(data) {
         titleBtn.setAttribute('value', 'Titre');
         titleBtn.textContent = "Titre";
         titleBtn.setAttribute('onclick', 'title()');
-    // -------------------------------------------------------------------------      
+
+    // ------------------------------------------------------------------------- 
+
         label.appendChild(select);
         select.appendChild(popularityBtn);
         select.appendChild(dateBtn);
