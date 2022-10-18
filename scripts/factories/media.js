@@ -1,5 +1,5 @@
 export function mediaFactory(data) {
-    const { image, video, title, likes, date } = data;
+    const { image, video, title, likes, date, id } = data;
     const picture = `assets/images/${image}`;
     const playVideo = `assets/images/${video}`
 
@@ -16,6 +16,7 @@ export function mediaFactory(data) {
 
         // All card
         article.setAttribute("class", "article-photo");
+        article.setAttribute("data-id", id)
         a.setAttribute('onclick', 'openLightbox()')
 
         if(image){
@@ -115,5 +116,5 @@ export function mediaFactory(data) {
         return(div);
     }
 
-    return { image, video, title, likes, date, getMediasCardDOM, lightbox, filterBtn }
+    return { image, video, title, likes, date, id, getMediasCardDOM, lightbox, filterBtn }
 };
