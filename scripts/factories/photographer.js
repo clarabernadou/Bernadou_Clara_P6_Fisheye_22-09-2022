@@ -81,19 +81,25 @@ export function photographerFactory(data) {
     }
     
     function getFrameDOM() {
-        
-
         const aside = document.createElement( 'aside' );
         const p = document.createElement( 'p' );
-        const i = document.createElement( 'icon' )
+        const div = document.createElement( 'div' );
+        const totalLikes = document.createElement( 'p' );
+        const i = document.createElement( 'icon' );
 
     // -------------------------------------------------------------------------
 
-        aside.setAttribute('class', 'frame')
+        aside.setAttribute('class', 'frame');
+        aside.setAttribute('onclick', 'totalLikes()');
+        totalLikes.setAttribute('class', 'totalLikes');
+        i.setAttribute('class', 'fas fa-heart');
         p.textContent = price + "€/jour";
 
     // -------------------------------------------------------------------------
     
+        aside.appendChild(div);
+        div.appendChild(totalLikes);
+        div.appendChild(i);
         aside.appendChild(p);
         return (aside);
     }

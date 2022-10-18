@@ -55,16 +55,17 @@ async function init(){
         console.log(images)
         console.log(image)
 
-            for(let link of links){
-                link.addEventListener("click", function(e){
-                   e.preventDefault();
-                        const mediaModel = mediaFactory(image);
-                        const mediaCardDOM = mediaModel.lightbox();
-                        lightbox.appendChild(mediaCardDOM);
-                });
-            };
+        for(let link of links){
+            link.addEventListener("click", function(e){
+                e.preventDefault();
+                const mediaModel = mediaFactory(image);
+                const mediaCardDOM = mediaModel.lightbox();
+                lightbox.appendChild(mediaCardDOM);
+            });
+        };
     };
 
+    // Filter function
     async function filter(){
         const photographFilter = document.querySelector(".photograph-filter");
         const btnModel = mediaFactory(myMedia);
@@ -72,14 +73,13 @@ async function init(){
         photographFilter.appendChild(btnFilterDOM);
     }
 
+    //Display functions in page
     displayPhotographerData(photographer);
     filter(myMedia)
     displayMediaData(myMedia);
     displayFrameData(photographer);
     displayNameContact(photographer);
     lightboxMedia();
-
-    console.log(myMedia)
 }
 
 init();
