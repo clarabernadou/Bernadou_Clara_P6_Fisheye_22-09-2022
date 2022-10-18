@@ -91,40 +91,28 @@ export function mediaFactory(data) {
     }
 
     function filterBtn() {
-        const label = document.createElement( 'label' );
-        const select = document.createElement( 'select' );
-        const popularityBtn = document.createElement( 'option' );
-        const dateBtn = document.createElement( 'option' );
-        const titleBtn = document.createElement( 'option' );
+        const div = document.createElement( 'div' );
+        const popularityBtn = document.createElement( 'button' );
+        const dateBtn = document.createElement( 'button' );
+        const titleBtn = document.createElement( 'button' );
         
     // -------------------------------------------------------------------------
 
-        label.setAttribute('for', 'filter');
-        label.textContent = "Trier par ";
-
-        select.setAttribute('name', 'filter');
-        select.setAttribute('class', 'open-option');
-
-        popularityBtn.setAttribute('value', 'Popularité');
+        div.textContent = "Trier par ";
         popularityBtn.textContent = "Popularité";
-        popularityBtn.setAttribute('onclick', 'popularity()');
-
-        dateBtn.setAttribute('value', 'Date');
+        popularityBtn.setAttribute('class', 'popularity-btn');
         dateBtn.textContent = "Date";
-        dateBtn.setAttribute('onclick', 'date()');
-
-        titleBtn.setAttribute('value', 'Titre');
+        dateBtn.setAttribute('class', 'date-btn');
         titleBtn.textContent = "Titre";
-        titleBtn.setAttribute('onclick', 'title()');
+        titleBtn.setAttribute('class', 'title-btn');
 
     // ------------------------------------------------------------------------- 
 
-        label.appendChild(select);
-        select.appendChild(popularityBtn);
-        select.appendChild(dateBtn);
-        select.appendChild(titleBtn);  
+        div.appendChild(popularityBtn);
+        div.appendChild(dateBtn);
+        div.appendChild(titleBtn);  
         
-        return(label);
+        return(div);
     }
 
     return { image, video, title, likes, date, getMediasCardDOM, lightbox, filterBtn }
