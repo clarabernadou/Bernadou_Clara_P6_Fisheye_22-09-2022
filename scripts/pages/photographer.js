@@ -55,7 +55,7 @@ async function init(){
         for(let link of links){
             link.addEventListener("click", function(e){
                 // Remove prevent default
-                e.preventDefault(); 
+                e.preventDefault();
                 // Display the lightbox
                 lightbox.showModal(); 
                 // Recovery the media id
@@ -67,9 +67,40 @@ async function init(){
                 const mediaModel = mediaFactory(mediaImg);
                 const mediaCardDOM = mediaModel.lightbox();
                 lightbox.appendChild(mediaCardDOM);
+            // ---------------------------------------------------------------
+                const prevBtn = document.querySelector('.fa-chevron-left');
+
+                    // Prev button
+                    prevBtn.addEventListener("click", function(e){
+                        // Reset image
+                        lightbox.innerHTML = ""; 
+                        // Find media index
+                        const mediaIndex = myMedia.findIndex((m => m.id == mediaId));
+                        // Media index -1 for get prev media
+                        const pressPrev = mediaIndex -1;
+                        // Add index in myMedia
+                        const mediaIndexPrev = myMedia[pressPrev];
+                        // Display with factories
+                        const mediaModel = mediaFactory(mediaIndexPrev);
+                        const mediaCardDOM = mediaModel.lightbox();
+                        lightbox.appendChild(mediaCardDOM);
+                    });
             });
-        };
+        };    
     };
+
+            //const imgVideo = document.querySelector('.img-video');
+            // Reset images
+            //imgVideo.innerHTML = "";            
+            
+            // Recovery the media id
+            //let mediaId = e.target.closest("article").getAttribute("data-id");
+            //console.log(mediaId);
+
+            // Recovery the media index
+            //const mediaIndex = myMedia.findIndex(mediaId);
+            //console.log(mediaIndex);
+
 
     // Display filter button in page
     async function filter(){
@@ -128,11 +159,53 @@ async function init(){
     //Display functions in page
     displayPhotographerData(photographer);
     displayMediaData(myMedia);
+    filter();
+    filterFunction();
     displayFrameData(photographer);
     displayNameContact(photographer);
     lightboxMedia();
-    filter()
-    filterFunction();
+
+
+    // Like function
+    function likePhoto(){
+        const likeBtn = document.querySelectorAll(".div__likes");
+        const likeCount = document.querySelectorAll('.likes');
+
+        for (let i = 0; i < likeBtn.length; i++) {
+            likeBtn[i].addEventListener("click", function(e) {
+                // Recovery the media id
+                let mediaId = e.target.closest("article").getAttribute("data-id");
+                console.log(mediaId);
+
+
+                // Find the media with the same id
+                let mediaLiked = myMedia.find( m => m.id == mediaId);
+                console.log(mediaLiked);
+
+
+                // Recovery the like count
+                let mediaLikes = e.target.closest("article").getAttribute("data-likes");
+                console.log(mediaLikes)
+
+
+                // Set false the liked by default
+                let hasClicked = false;
+
+            
+                // Add the like to the count
+                const liked = mediaLikes + 1;
+                console.log(liked)
+
+            
+                // For liked the photo 
+                if(!hasClicked){
+                    likeCount.textContent = liked;
+                    hasClicked = true;
+                }
+            });
+        }        
+    };
+    likePhoto();
 }
 
 init();

@@ -17,7 +17,7 @@ export function mediaFactory(data) {
         // All card
         article.setAttribute("class", "article-photo");
         article.setAttribute("data-id", id)
-        a.setAttribute('onclick', 'openLightbox()')
+        article.setAttribute("data-likes", likes)
 
         if(image){
             const img = document.createElement( "img" );
@@ -35,7 +35,6 @@ export function mediaFactory(data) {
         div.setAttribute('class', 'infoMedia');
         p.textContent = title;
         div1.setAttribute('class', 'div__likes')
-        div1.setAttribute('onclick', `likePhoto(${data.likes})`);
         p1.setAttribute('class', 'likes');
         p1.textContent = likes;
         i.setAttribute('class', 'fas fa-heart');
@@ -65,7 +64,7 @@ export function mediaFactory(data) {
         close.setAttribute('onclick', 'closeLightbox()');
         div.setAttribute('class', 'align__icon');
         prev.setAttribute('class', 'fas fa-chevron-left');
-        prev.setAttribute('onclick', 'prev()')
+        // prev.setAttribute('onclick', 'prev()')
         divImgVideo.setAttribute('class', 'img-video');
 
         if(image){
@@ -79,7 +78,7 @@ export function mediaFactory(data) {
         }
 
         next.setAttribute('class', 'fas fa-chevron-right');
-        next.setAttribute('onclick', 'next()');
+        // next.setAttribute('onclick', 'next()');
 
     // -------------------------------------------------------------------------
 
