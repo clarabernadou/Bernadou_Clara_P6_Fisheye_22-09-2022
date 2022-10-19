@@ -70,37 +70,23 @@ async function init(){
             // ---------------------------------------------------------------
                 const prevBtn = document.querySelector('.fa-chevron-left');
 
-                    // Prev button
-                    prevBtn.addEventListener("click", function(e){
-                        // Reset image
-                        lightbox.innerHTML = ""; 
-                        // Find media index
-                        const mediaIndex = myMedia.findIndex((m => m.id == mediaId));
-                        // Media index -1 for get prev media
-                        const pressPrev = mediaIndex -1;
-                        // Add index in myMedia
-                        const mediaIndexPrev = myMedia[pressPrev];
-                        // Display with factories
-                        const mediaModel = mediaFactory(mediaIndexPrev);
-                        const mediaCardDOM = mediaModel.lightbox();
-                        lightbox.appendChild(mediaCardDOM);
-                    });
+                prevBtn.addEventListener("click", function(e){ 
+                    // Reset image
+                    lightbox.innerHTML = ""; 
+                    // Find media index
+                    const mediaIndex = myMedia.findIndex((m => m.id == mediaId));
+                    // Media index -1 for get prev media
+                    const pressPrev = mediaIndex -1;
+                    // Add index in myMedia
+                    const mediaIndexPrev = myMedia[pressPrev];
+                    // Display with factories
+                    const mediaModel = mediaFactory(mediaIndexPrev);
+                    const mediaCardDOM = mediaModel.lightbox();
+                    lightbox.appendChild(mediaCardDOM);
+                });
             });
         };    
     };
-
-            //const imgVideo = document.querySelector('.img-video');
-            // Reset images
-            //imgVideo.innerHTML = "";            
-            
-            // Recovery the media id
-            //let mediaId = e.target.closest("article").getAttribute("data-id");
-            //console.log(mediaId);
-
-            // Recovery the media index
-            //const mediaIndex = myMedia.findIndex(mediaId);
-            //console.log(mediaIndex);
-
 
     // Display filter button in page
     async function filter(){
