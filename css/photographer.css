@@ -324,14 +324,23 @@ article p {
 }
 
 .lightbox img {
-    width: 100%;
+    width: 20em;
     height: 15.3em;
     object-fit: cover;
 }
 
 .lightbox video {
-    width: 100%;
+    width: 20em;
     height: 15.3em;
     object-fit: cover;
 }
 
+@media screen and (max-width: 1170px){
+    .lightbox img {
+        width: 16em;
+    }
+    
+    .lightbox video {
+        width: 16em;
+    } 
+}
