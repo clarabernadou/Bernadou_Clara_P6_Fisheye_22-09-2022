@@ -64,6 +64,7 @@ async function init(){
         const btnFilterDOM = btnModel.filterBtn();
         photographFilter.appendChild(btnFilterDOM);
 
+        // Display filter buttons
         const title = document.querySelector('.title-all');
         const filterBtn = document.querySelector(".filter-btn");
 
@@ -137,6 +138,31 @@ async function init(){
 
 // -------------------------------------------------------------------------------
 
+    // Like function
+    function likePhoto(){
+        const likeBtn = document.querySelectorAll(".div__likes");
+        const likeCount = document.querySelector('.likes');
+
+        for (let i = 0; i < likeBtn.length; i++) {
+            likeBtn[i].addEventListener("click", function(e) {
+                
+                // let mediaId = e.target.closest("article").getAttribute("data-id");
+                // let mediaLiked = myMedia.find( m => m.id == mediaId);
+
+                let mediaLikes = e.target.closest("article").getAttribute("data-likes");
+                let hasClicked = false;
+                const liked = parseInt(mediaLikes) + 1;
+                
+                if(!hasClicked){
+                    likeCount.textContent = liked;
+                    hasClicked = true;
+                };
+            });
+        };      
+    };
+
+// -------------------------------------------------------------------------------
+
     // Display functions in page
     displayPhotographerData(photographer);
     displayFrameData(photographer);
@@ -144,6 +170,7 @@ async function init(){
     displayMediaData(myMedia);
     filter();
     filterFunction();
+    likePhoto();
 };
 
 init();
