@@ -1,18 +1,44 @@
-function likePhoto(data){
-    const likesArray = Array.from(document.querySelectorAll(".likes"))
-    console.log(likesArray)
+// Like function
+function likePhoto(){
+    const likeBtn = document.querySelectorAll(".div__likes");
+    const likeCount = document.querySelectorAll('.likes');
 
-    likesArray.forEach((element) => {
-        let hasClicked = false;
-        let counter = data;
-        const add = counter + 1;
+    for (let i = 0; i < likeBtn.length; i++) {
+        likeBtn[i].addEventListener("click", function(e) {
+            // Recovery the media id
+            let mediaId = e.target.closest("article").getAttribute("data-id");
+            console.log(mediaId);
 
-        if(!hasClicked){
-            element.textContent = add;
-            hasClicked = true;
-        }        
-    });  
+
+            // Find the media with the same id
+            let mediaLiked = myMedia.find( m => m.id == mediaId);
+            console.log(mediaLiked);
+
+
+            // Recovery the like count
+            let mediaLikes = e.target.closest("article").getAttribute("data-likes");
+            console.log(mediaLikes)
+
+
+            // Set false the liked by default
+            let hasClicked = false;
+
+        
+            // Add the like to the count
+            const liked = mediaLikes + 1;
+            console.log(liked)
+
+        
+            // For liked the photo 
+            if(!hasClicked){
+                likeCount.textContent = liked;
+                hasClicked = true;
+            }
+        });
+    }        
 };
+
+likePhoto();
 
 function totalLikes(){
     const likesArray = Array.from(document.querySelectorAll(".likes"));
