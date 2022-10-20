@@ -1,41 +1,22 @@
-// Like function
-function likePhoto(){
-    const likeBtn = document.querySelectorAll(".div__likes");
-    const likeCount = document.querySelectorAll('.likes');
+for (let i = 0; i < likeBtn.length; i++) {
+    console.log("hello")
+    likeBtn[i].addEventListener("click", function(e) {
+    
+        let mediaId = e.target.closest("article").getAttribute("data-id");
+        let media = myMedia.find( m => m.id == mediaId);
+        let mediaLikes = e.target.closest("article").getAttribute("data-likes");
+        let hasClicked = false;
 
-    for (let i = 0; i < likeBtn.length; i++) {
-        likeBtn[i].addEventListener("click", function(e) {
-            // Recovery the media id
-            let mediaId = e.target.closest("article").getAttribute("data-id");
-            console.log(mediaId);
-
-
-            // Find the media with the same id
-            let mediaLiked = myMedia.find( m => m.id == mediaId);
-            console.log(mediaLiked);
-
-
-            // Recovery the like count
-            let mediaLikes = e.target.closest("article").getAttribute("data-likes");
-            console.log(mediaLikes)
-
-
-            // Set false the liked by default
-            let hasClicked = false;
-
+        const liked = parseInt(mediaLikes) + 1;
         
-            // Add the like to the count
-            const liked = mediaLikes + 1;
-            console.log(liked)
-
-        
-            // For liked the photo 
-            if(!hasClicked){
-                likeCount.textContent = liked;
-                hasClicked = true;
-            }
-        });
-    }        
+        for(let l = 0; l < likeCount.length; l++){
+            console.log("hello");
+        }
+        if(!hasClicked){
+            likeCount.innerHTML = "";
+            hasClicked = true;
+        };
+    });
 };
 
 likePhoto();
