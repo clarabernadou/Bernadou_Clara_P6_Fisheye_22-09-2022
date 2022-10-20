@@ -283,12 +283,9 @@ article p {
     /* display: none; */
     width: 100%;
     height: 100%;
-    top: 0;
-    left: 0;
     background-color: white;
     position: fixed;
     border: none;
-    padding: 0;
 }
 
 .lightbox article {
@@ -327,14 +324,76 @@ article p {
 }
 
 .lightbox img {
-    width: 100%;
+    width: 20em;
     height: 15.3em;
     object-fit: cover;
 }
 
 .lightbox video {
-    width: 100%;
+    width: 20em;
     height: 15.3em;
     object-fit: cover;
 }
 
+@media screen and (max-width: 1170px){
+    .lightbox img {
+        width: 16em;
+    }
+    
+    .lightbox video {
+        width: 16em;
+    } 
+}
+
+/* FILTER */
+
+.div-all {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+
+}
+
+.div-btn-txt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 170px;
+    border-radius: 5px;    
+    background-color: #901C1C;
+    padding: 1em 0;
+    
+}
+
+.title-all {
+    font-size: 18px;
+    text-align: center;
+    color: white;    
+    border: none;  
+    background-color: #901C1C;
+    margin: 0.5em 0;
+}
+
+.filter-btn{
+    display: none;
+    flex-direction: column;
+    align-items: start;
+}
+
+.filter-btn button {
+    font-size: 18px;
+    text-align: center;
+    color: white;    
+    border: none;  
+    background-color: #901C1C;
+    margin: 0.5em 0;
+}
+
+.filter-btn hr {
+    width: 100%;
+}
+
+.fa-chevron-down {
+    color: white;
+}

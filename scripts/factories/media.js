@@ -1,5 +1,5 @@
 export function mediaFactory(data) {
-    const { image, video, title, likes, date } = data;
+    const { image, video, title, likes, date, id } = data;
     const picture = `assets/images/${image}`;
     const playVideo = `assets/images/${video}`
 
@@ -16,7 +16,8 @@ export function mediaFactory(data) {
 
         // All card
         article.setAttribute("class", "article-photo");
-        a.setAttribute('onclick', 'openLightbox()')
+        article.setAttribute("data-id", id)
+        article.setAttribute("data-likes", likes)
 
         if(image){
             const img = document.createElement( "img" );
@@ -34,7 +35,6 @@ export function mediaFactory(data) {
         div.setAttribute('class', 'infoMedia');
         p.textContent = title;
         div1.setAttribute('class', 'div__likes')
-        div1.setAttribute('onclick', `likePhoto(${data.likes})`);
         p1.setAttribute('class', 'likes');
         p1.textContent = likes;
         i.setAttribute('class', 'fas fa-heart');
@@ -64,7 +64,6 @@ export function mediaFactory(data) {
         close.setAttribute('onclick', 'closeLightbox()');
         div.setAttribute('class', 'align__icon');
         prev.setAttribute('class', 'fas fa-chevron-left');
-        prev.setAttribute('onclick', 'prev()')
         divImgVideo.setAttribute('class', 'img-video');
 
         if(image){
@@ -78,7 +77,6 @@ export function mediaFactory(data) {
         }
 
         next.setAttribute('class', 'fas fa-chevron-right');
-        next.setAttribute('onclick', 'next()');
 
     // -------------------------------------------------------------------------
 
@@ -91,41 +89,52 @@ export function mediaFactory(data) {
     }
 
     function filterBtn() {
-        const label = document.createElement( 'label' );
-        const select = document.createElement( 'select' );
-        const popularityBtn = document.createElement( 'option' );
-        const dateBtn = document.createElement( 'option' );
-        const titleBtn = document.createElement( 'option' );
+        const p = document.createElement( 'p' );
+        const div = document.createElement( 'div' );
+        const divBtnTxt = document.createElement ( 'div' );
+        const title = document.createElement( 'button' );
+        const divBtn = document.createElement( 'div' );
+        const popularityBtn = document.createElement( 'button' );
+        const hr = document.createElement( 'hr' );
+        const dateBtn = document.createElement( 'button' );
+        const hr2 = document.createElement( 'hr' );
+        const titleBtn = document.createElement( 'button' );
+        const iDown = document.createElement ( 'i' );
         
     // -------------------------------------------------------------------------
 
-        label.setAttribute('for', 'filter');
-        label.textContent = "Trier par ";
+        p.textContent = "Trier par";
+        div.setAttribute('class', 'div-all');
+        divBtnTxt.setAttribute('class', 'div-btn-txt'); 
 
-        select.setAttribute('name', 'filter');
-        select.setAttribute('class', 'open-option');
+        title.textContent = "Toutes les photos";
+        title.setAttribute('class', 'title-all')
 
-        popularityBtn.setAttribute('value', 'Popularité');
+        divBtn.setAttribute('class', 'filter-btn');
         popularityBtn.textContent = "Popularité";
-        popularityBtn.setAttribute('onclick', 'popularity()');
+        popularityBtn.setAttribute('class', 'popularity-btn');
 
-        dateBtn.setAttribute('value', 'Date');
         dateBtn.textContent = "Date";
-        dateBtn.setAttribute('onclick', 'date()');
+        dateBtn.setAttribute('class', 'date-btn');
 
-        titleBtn.setAttribute('value', 'Titre');
         titleBtn.textContent = "Titre";
-        titleBtn.setAttribute('onclick', 'title()');
+        titleBtn.setAttribute('class', 'title-btn');
 
+        iDown.setAttribute('class', 'fas fa-chevron-down')
     // ------------------------------------------------------------------------- 
 
-        label.appendChild(select);
-        select.appendChild(popularityBtn);
-        select.appendChild(dateBtn);
-        select.appendChild(titleBtn);  
-        
-        return(label);
+        div.appendChild(p);
+        div.appendChild(divBtnTxt);
+        divBtnTxt.appendChild(title);
+        divBtnTxt.appendChild(divBtn);
+        divBtn.appendChild(popularityBtn);
+        divBtn.appendChild(hr);
+        divBtn.appendChild(dateBtn);
+        divBtn.appendChild(hr2);
+        divBtn.appendChild(titleBtn);
+
+        return(div);
     }
 
-    return { image, video, title, likes, date, getMediasCardDOM, lightbox, filterBtn }
+    return { image, video, title, likes, date, id, getMediasCardDOM, lightbox, filterBtn }
 };
