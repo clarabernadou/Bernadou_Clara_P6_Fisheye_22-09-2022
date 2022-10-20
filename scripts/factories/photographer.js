@@ -92,6 +92,7 @@ export function photographerFactory(data) {
         aside.setAttribute('class', 'frame');
         aside.setAttribute('onclick', 'totalLikes()');
         totalLikes.setAttribute('class', 'totalLikes');
+        totalLikes.textContent = 12;
         i.setAttribute('class', 'fas fa-heart');
         p.textContent = price + "€/jour";
 

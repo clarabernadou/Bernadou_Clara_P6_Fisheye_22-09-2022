@@ -141,16 +141,16 @@ async function init(){
     // Like function
     function likePhoto(){
         const likeBtn = document.querySelectorAll(".div__likes");
-        const likeCount = document.querySelector('.likes');
+        const likeCount = document.querySelectorAll('.likes');
 
         for (let i = 0; i < likeBtn.length; i++) {
             likeBtn[i].addEventListener("click", function(e) {
-                
-                // let mediaId = e.target.closest("article").getAttribute("data-id");
-                // let mediaLiked = myMedia.find( m => m.id == mediaId);
-
+            
+                let mediaId = e.target.closest("article").getAttribute("data-id");
+                let media = myMedia.find( m => m.id == mediaId);
                 let mediaLikes = e.target.closest("article").getAttribute("data-likes");
                 let hasClicked = false;
+
                 const liked = parseInt(mediaLikes) + 1;
                 
                 if(!hasClicked){
@@ -158,7 +158,51 @@ async function init(){
                     hasClicked = true;
                 };
             });
-        };      
+        };
+    };
+
+// -------------------------------------------------------------------------------
+
+    // Display a lightbox when one of the media is clicked
+    async function lightboxMedia(){
+        const lightbox = document.querySelector(".lightbox");
+        const links = document.querySelectorAll("a");
+
+        for(let link of links){
+            link.addEventListener("click", function(e){
+                e.preventDefault();
+                lightbox.showModal(); 
+
+                let mediaId = e.target.closest("article").getAttribute("data-id");
+                let mediaImg = myMedia.find( m => m.id == mediaId);
+                
+                const mediaModel = mediaFactory(mediaImg);
+                const mediaCardDOM = mediaModel.lightbox();
+                lightbox.appendChild(mediaCardDOM);
+
+                // ---------------------------------------------------------------
+
+                // Preview button
+                const prevBtn = document.querySelector('.fa-chevron-left');
+
+                prevBtn.addEventListener("click", function(e){ 
+                    lightbox.innerHTML = "";
+
+                    const mediaIndex = myMedia.findIndex((m => m.id == mediaId));
+                    console.log(mediaIndex)
+
+                    const pressPrev = mediaIndex -1;
+                    console.log(pressPrev)
+
+                    const mediaIndexPrev = myMedia[pressPrev];
+                    console.log(mediaIndexPrev);
+
+                    const mediaModel = mediaFactory(mediaIndexPrev);
+                    const mediaCardDOM = mediaModel.lightbox();
+                    lightbox.appendChild(mediaCardDOM);
+                });
+            });
+        };  
     };
 
 // -------------------------------------------------------------------------------
@@ -171,6 +215,7 @@ async function init(){
     filter();
     filterFunction();
     likePhoto();
+    lightboxMedia();
 };
 
 init();
