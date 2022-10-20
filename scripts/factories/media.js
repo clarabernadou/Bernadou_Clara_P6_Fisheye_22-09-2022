@@ -89,27 +89,50 @@ export function mediaFactory(data) {
     }
 
     function filterBtn() {
+        const p = document.createElement( 'p' );
         const div = document.createElement( 'div' );
+        const divBtnTxt = document.createElement ( 'div' );
+        const title = document.createElement( 'button' );
+        const divBtn = document.createElement( 'div' );
         const popularityBtn = document.createElement( 'button' );
+        const hr = document.createElement( 'hr' );
         const dateBtn = document.createElement( 'button' );
+        const hr2 = document.createElement( 'hr' );
         const titleBtn = document.createElement( 'button' );
+        const iDown = document.createElement ( 'i' );
         
     // -------------------------------------------------------------------------
 
-        div.textContent = "Trier par ";
+        p.textContent = "Trier par";
+        div.setAttribute('class', 'div-all');
+        divBtnTxt.setAttribute('class', 'div-btn-txt'); 
+
+        title.textContent = "Toutes les photos";
+        title.setAttribute('class', 'title-all')
+
+        divBtn.setAttribute('class', 'filter-btn');
         popularityBtn.textContent = "Popularité";
         popularityBtn.setAttribute('class', 'popularity-btn');
+
         dateBtn.textContent = "Date";
         dateBtn.setAttribute('class', 'date-btn');
+
         titleBtn.textContent = "Titre";
         titleBtn.setAttribute('class', 'title-btn');
 
+        iDown.setAttribute('class', 'fas fa-chevron-down')
     // ------------------------------------------------------------------------- 
 
-        div.appendChild(popularityBtn);
-        div.appendChild(dateBtn);
-        div.appendChild(titleBtn);  
-        
+        div.appendChild(p);
+        div.appendChild(divBtnTxt);
+        divBtnTxt.appendChild(title);
+        divBtnTxt.appendChild(divBtn);
+        divBtn.appendChild(popularityBtn);
+        divBtn.appendChild(hr);
+        divBtn.appendChild(dateBtn);
+        divBtn.appendChild(hr2);
+        divBtn.appendChild(titleBtn);
+
         return(div);
     }
 
