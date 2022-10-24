@@ -5,6 +5,9 @@ import { mediaFactory } from "../factories/media.js";
 getPhotographers();
 
 let myMedia = [];
+let popularityFilter = [];
+let dateFilter = [];
+let titleFilter = [];
 
 async function init(){
     let urlData = new URLSearchParams(window.location.search)
@@ -67,10 +70,12 @@ async function init(){
         // Display filter buttons
         const title = document.querySelector('.title-all');
         const filterBtn = document.querySelector(".filter-btn");
+        const icon = document.querySelector('.divIcon i');
 
         title.addEventListener(('click'), function(e){
             filterBtn.style.display = 'block';
             title.style.display = 'none';
+            icon.style.display = 'none';
         });
     };
 
@@ -82,6 +87,7 @@ async function init(){
         const dateBtn = document.querySelector('.date-btn');
         const titleBtn = document.querySelector('.title-btn');
         const title = document.querySelector('.title-all');
+        const icon = document.querySelector('.divIcon i');
         const filterBtn = document.querySelector(".filter-btn");
     
         // POPULARITY
@@ -90,15 +96,11 @@ async function init(){
             photographGallery.innerHTML = "";
             title.textContent = "Popularité";
             title.style.display = 'block';
+            icon.style.display = 'block';
             filterBtn.style.display = "none";
 
-            let popularityFilter = myMedia.sort((l1, l2) => (l1.likes < l2.likes) ? 1 : (l1.likes > l2.likes) ? -1 : 0);
-        
-            popularityFilter.forEach((popularityFilter) => {
-                const mediaModel = mediaFactory(popularityFilter);
-                const mediaCardDOM = mediaModel.getMediasCardDOM();
-                photographGallery.appendChild(mediaCardDOM);
-            });
+            myMedia.sort((l1, l2) => (l1.likes < l2.likes) ? 1 : (l1.likes > l2.likes) ? -1 : 0)
+            displayMediaData(myMedia);
         });
 
          // DATE
@@ -107,15 +109,11 @@ async function init(){
             photographGallery.innerHTML = "";
             title.textContent = "Date";
             title.style.display = 'block';
+            icon.style.display = 'block';
             filterBtn.style.display = "none";
 
-            let dateFilter = myMedia.sort((d1, d2) => (d1.date < d2.date) ? 1 : (d1.date > d2.date) ? -1 : 0);
-    
-            dateFilter.forEach((dateFilter) => {
-                const mediaModel = mediaFactory(dateFilter);
-                const mediaCardDOM = mediaModel.getMediasCardDOM();
-                photographGallery.appendChild(mediaCardDOM);
-            });
+            myMedia.sort((d1, d2) => (d1.date < d2.date) ? 1 : (d1.date > d2.date) ? -1 : 0);
+            displayMediaData(myMedia);
         });
 
         // TITLE
@@ -124,15 +122,11 @@ async function init(){
             photographGallery.innerHTML = "";
             title.textContent = "Titre";
             title.style.display = 'block';
+            icon.style.display = 'block';
             filterBtn.style.display = "none";
 
-            let titleFilter = myMedia.sort((t1, t2) => (t1.title > t2.title) ? 1 : (t1.title < t2.title) ? -1 : 0);
-        
-            titleFilter.forEach((titleFilter) => {
-                const mediaModel = mediaFactory(titleFilter);
-                const mediaCardDOM = mediaModel.getMediasCardDOM();
-                photographGallery.appendChild(mediaCardDOM);
-            });
+            myMedia.sort((t1, t2) => (t1.title > t2.title) ? 1 : (t1.title < t2.title) ? -1 : 0);
+            displayMediaData(myMedia);
         });
     };
 
@@ -145,18 +139,15 @@ async function init(){
 
         for (let i = 0; i < likeBtn.length; i++) {
             likeBtn[i].addEventListener("click", function(e) {
+                const mediaClicked = e.target.closest();
             
                 let mediaId = e.target.closest("article").getAttribute("data-id");
                 let media = myMedia.find( m => m.id == mediaId);
-                let mediaLikes = e.target.closest("article").getAttribute("data-likes");
-                let hasClicked = false;
+                let mediaLikes = e.target.closest("article")
 
-                const liked = parseInt(mediaLikes) + 1;
-                
-                if(!hasClicked){
-                    likeCount.textContent = liked;
-                    hasClicked = true;
-                };
+                let numberLikes = parseInt(mediaLikes.getAttribute("data-likes")) + 1;
+                likeCount[i].textContent = numberLikes;
+                mediaLikes.setAttribute('data-likes', numberLikes);
             });
         };
     };
@@ -182,29 +173,37 @@ async function init(){
 
                 // ---------------------------------------------------------------
 
-                // Preview button
+                // Previous/Next button
                 const prevBtn = document.querySelector('.fa-chevron-left');
+                const nextBtn = document.querySelector('.fa-chevron-right');
 
                 prevBtn.addEventListener("click", function(e){ 
                     lightbox.innerHTML = "";
-
                     const mediaIndex = myMedia.findIndex((m => m.id == mediaId));
-                    console.log(mediaIndex)
-
-                    const pressPrev = mediaIndex -1;
-                    console.log(pressPrev)
-
+                    const pressPrev = [mediaIndex -1];
                     const mediaIndexPrev = myMedia[pressPrev];
-                    console.log(mediaIndexPrev);
 
                     const mediaModel = mediaFactory(mediaIndexPrev);
                     const mediaCardDOM = mediaModel.lightbox();
-                    lightbox.appendChild(mediaCardDOM);
+                    lightbox.appendChild(mediaCardDOM);                        
+                });
+                
+                nextBtn.addEventListener("click", function(e){ 
+                    const imgVideo = document.querySelector('.img-video');
+                    imgVideo.innerHTML = "";
+                    const mediaIndex = myMedia.findIndex((m => m.id == mediaId));
+                    const pressNext = [mediaIndex +1];
+                    const mediaIndexNext = myMedia[pressNext];
+                    console.log(mediaId, mediaIndexNext.id);
+                    mediaId = mediaIndexNext.id;
+
+                    const mediaModel = mediaFactory(mediaIndexNext);
+                    const mediaCardDOM = mediaModel.lightbox();
+                    imgVideo.appendChild(mediaCardDOM);                        
                 });
             });
-        };  
+        };
     };
-
 // -------------------------------------------------------------------------------
 
     // Display functions in page
@@ -215,7 +214,7 @@ async function init(){
     filter();
     filterFunction();
     likePhoto();
-    lightboxMedia();
+    // lightboxMedia();
 };
 
 init();
