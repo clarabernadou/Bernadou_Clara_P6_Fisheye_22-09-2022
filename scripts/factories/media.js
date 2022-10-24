@@ -99,7 +99,10 @@ export function mediaFactory(data) {
         const dateBtn = document.createElement( 'button' );
         const hr2 = document.createElement( 'hr' );
         const titleBtn = document.createElement( 'button' );
-        const iDown = document.createElement ( 'i' );
+        const iconDown = document.createElement( 'i' );
+        const iconUp = document.createElement( 'i' );
+        const divIcon = document.createElement( 'div' );
+        const divIconBtn = document.createElement( 'div' );
         
     // -------------------------------------------------------------------------
 
@@ -120,14 +123,21 @@ export function mediaFactory(data) {
         titleBtn.textContent = "Titre";
         titleBtn.setAttribute('class', 'title-btn');
 
-        iDown.setAttribute('class', 'fas fa-chevron-down')
+        iconDown.setAttribute('class', 'fas fa-chevron-down');
+        iconUp.setAttribute('class', 'fas fa-chevron-up');
+        divIcon.setAttribute('class', 'divIcon');
+        divIconBtn.setAttribute('class', 'divIconBtn');
     // ------------------------------------------------------------------------- 
 
         div.appendChild(p);
         div.appendChild(divBtnTxt);
-        divBtnTxt.appendChild(title);
+        divBtnTxt.appendChild(divIcon);
+        divIcon.appendChild(title);
+        divIcon.appendChild(iconDown);
         divBtnTxt.appendChild(divBtn);
-        divBtn.appendChild(popularityBtn);
+        divBtn.appendChild(divIconBtn);
+        divIconBtn.appendChild(popularityBtn);
+        divIconBtn.appendChild(iconUp);
         divBtn.appendChild(hr);
         divBtn.appendChild(dateBtn);
         divBtn.appendChild(hr2);
