@@ -88,6 +88,26 @@ export function mediaFactory(data) {
         return(article)
     }
 
+    function lightboxMedia() {
+        const divImgVideo = document.createElement( 'div' );
+
+        divImgVideo.setAttribute('class', 'img-video');
+
+        if(image){
+            const img = document.createElement( "img" );
+            img.setAttribute("src", picture);
+            divImgVideo.appendChild(img);
+        }else{
+            const video = document.createElement( "video" );
+            video.setAttribute("src", playVideo);
+            divImgVideo.appendChild(video);
+        }
+
+        return(divImgVideo);
+    }
+
+ // -------------------------------------------------------------------------   
+
     function filterBtn() {
         const p = document.createElement( 'p' );
         const div = document.createElement( 'div' );
@@ -127,6 +147,7 @@ export function mediaFactory(data) {
         iconUp.setAttribute('class', 'fas fa-chevron-up');
         divIcon.setAttribute('class', 'divIcon');
         divIconBtn.setAttribute('class', 'divIconBtn');
+        
     // ------------------------------------------------------------------------- 
 
         div.appendChild(p);
@@ -146,5 +167,5 @@ export function mediaFactory(data) {
         return(div);
     }
 
-    return { image, video, title, likes, date, id, getMediasCardDOM, lightbox, filterBtn }
+    return { image, video, title, likes, date, id, getMediasCardDOM, lightbox, lightboxMedia, filterBtn }
 };
