@@ -124,18 +124,24 @@ async function init(){
         const likeCount = document.querySelectorAll('.likes');
 
         for (let i = 0; i < likeBtn.length; i++) {
+            let hasClicked = false;
             likeBtn[i].addEventListener("click", function(e) {
-                let mediaId = e.target.closest("article").getAttribute("data-id");
-                let media = myMedia.find( m => m.id == mediaId);
-                let mediaLikes = e.target.closest("article")
-                console.log(mediaLikes)
+                if(!hasClicked){
+                    let mediaId = e.target.closest("article").getAttribute("data-id");
+                    let media = myMedia.find( m => m.id == mediaId);
+                    let mediaLikes = e.target.closest("article")
+                    console.log(mediaLikes)
 
-                let numberLikes = parseInt(mediaLikes.getAttribute("data-likes")) + 1;
-                likeCount[i].textContent = numberLikes;
-                likeCount[i].style.color = '#901C1C';
-                likeCount[i].style.fontWeight = 500;
-                likeCount[i].style.fontSize = '24px';
-                mediaLikes.setAttribute('data-likes', numberLikes);
+                    let numberLikes = parseInt(mediaLikes.getAttribute("data-likes")) + 1;
+                    likeCount[i].textContent = numberLikes;
+                    likeCount[i].style.color = '#901C1C';
+                    likeCount[i].style.fontWeight = 500;
+                    likeCount[i].style.fontSize = '24px';
+                    mediaLikes.setAttribute('data-likes', numberLikes);                    
+                    hasClicked = true;
+                }else{
+                    console.log('error');
+                }
             });
         };
     };
@@ -214,7 +220,8 @@ async function init(){
             });
         };  
         // Call likes function
-        likePhoto(); 
+        likePhoto();
+         
     };
 // -------------------------------------------------------------------------------
     // Call functions in page
