@@ -53,16 +53,19 @@ h1 {
 .photographer_section article h3 {
     color: #901C1C;
     margin: 0em;
+    font-size: 13px;
 }
 
 .photographer_section article h4 {
     margin: 0em;
     color: black;
+    font-size: 10px;
 }
 
 .photographer_section article p {
-    margin: 0em;
+    margin: -1em;
     font-weight: lighter;
+    font-size: 9px;
     opacity: 0.5;
     color: black;
 }

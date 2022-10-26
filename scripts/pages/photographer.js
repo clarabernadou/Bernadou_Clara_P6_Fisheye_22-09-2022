@@ -57,6 +57,7 @@ async function init(){
         const filterBtn = document.querySelector(".filter-btn");
         const icon = document.querySelector('.divIcon i');
 
+        // Display filter title
         title.addEventListener(('click'), function(e){
             filterBtn.style.display = 'block';
             title.style.display = 'none';
@@ -131,6 +132,9 @@ async function init(){
 
                 let numberLikes = parseInt(mediaLikes.getAttribute("data-likes")) + 1;
                 likeCount[i].textContent = numberLikes;
+                likeCount[i].style.color = '#901C1C';
+                likeCount[i].style.fontWeight = 500;
+                likeCount[i].style.fontSize = '24px';
                 mediaLikes.setAttribute('data-likes', numberLikes);
             });
         };
@@ -179,9 +183,12 @@ async function init(){
                         console.log(mediaId, mediaIndexNext.id);
                         mediaId = mediaIndexNext.id;
 
+                        let firstElement = myMedia.shift();
+                        let lastElement = myMedia.pop();
+                
                         const mediaModel = mediaFactory(mediaIndexNext);
                         const mediaCardDOM = mediaModel.lightboxMedia();
-                        imgVideo.appendChild(mediaCardDOM);  
+                        imgVideo.appendChild(mediaCardDOM);                            
                     });
 
                     // Next button
@@ -194,26 +201,29 @@ async function init(){
                         console.log(mediaId, mediaIndexNext.id);
                         mediaId = mediaIndexNext.id;
 
+                        let firstElement = myMedia.shift();
+                        let lastElement = myMedia.pop();                      
+
                         const mediaModel = mediaFactory(mediaIndexNext);
                         const mediaCardDOM = mediaModel.lightboxMedia();
                         imgVideo.appendChild(mediaCardDOM);                        
                     });
                 };
-
-                // Display lightbox
+                // Call lightbox function
                 lightbox();
             });
-        };   
+        };  
+        // Call likes function
+        likePhoto(); 
     };
 // -------------------------------------------------------------------------------
-    // Display functions in page
+    // Call functions in page
     displayPhotographerData(photographer);
     displayFrameData(photographer);
     displayNameContact(photographer);
     displayMediaData(myMedia);
     filter();
     filterFunction();
-    likePhoto();
 };
 
 init();
