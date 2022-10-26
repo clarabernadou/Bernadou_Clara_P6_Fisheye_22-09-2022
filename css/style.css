@@ -25,10 +25,12 @@ h1 {
 }
 
 .photographer_section {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 70px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-around;
     margin: 100px 0;
+    gap: 4em;
 }
 
 .photographer_section article {
