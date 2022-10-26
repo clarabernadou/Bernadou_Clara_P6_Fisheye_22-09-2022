@@ -5,9 +5,6 @@ import { mediaFactory } from "../factories/media.js";
 getPhotographers();
 
 let myMedia = [];
-let popularityFilter = [];
-let dateFilter = [];
-let titleFilter = [];
 
 async function init(){
     let urlData = new URLSearchParams(window.location.search)
@@ -24,18 +21,6 @@ async function init(){
         const photographerModel = photographerFactory(photographer);
         const photographCardDOM = photographerModel.getPhotographCardDOM();
         photographHeader.appendChild(photographCardDOM);
-    };
-
-// -------------------------------------------------------------------------------
-
-    // Display all photographer's media
-    async function displayMediaData(myMedia){
-        const photographGallery = document.querySelector(".photograph-gallery");
-        myMedia.forEach((myMedia) => {
-            const mediaModel = mediaFactory(myMedia);
-            const mediaCardDOM = mediaModel.getMediasCardDOM();
-            photographGallery.appendChild(mediaCardDOM);
-        })
     };
 
 // -------------------------------------------------------------------------------
@@ -72,6 +57,7 @@ async function init(){
         const filterBtn = document.querySelector(".filter-btn");
         const icon = document.querySelector('.divIcon i');
 
+        // Display filter title
         title.addEventListener(('click'), function(e){
             filterBtn.style.display = 'block';
             title.style.display = 'none';
@@ -138,83 +124,113 @@ async function init(){
         const likeCount = document.querySelectorAll('.likes');
 
         for (let i = 0; i < likeBtn.length; i++) {
+            let hasClicked = false;
             likeBtn[i].addEventListener("click", function(e) {
-                const mediaClicked = e.target.closest();
-            
-                let mediaId = e.target.closest("article").getAttribute("data-id");
-                let media = myMedia.find( m => m.id == mediaId);
-                let mediaLikes = e.target.closest("article")
+                if(!hasClicked){
+                    let mediaId = e.target.closest("article").getAttribute("data-id");
+                    let media = myMedia.find( m => m.id == mediaId);
+                    let mediaLikes = e.target.closest("article")
+                    console.log(mediaLikes)
 
-                let numberLikes = parseInt(mediaLikes.getAttribute("data-likes")) + 1;
-                likeCount[i].textContent = numberLikes;
-                mediaLikes.setAttribute('data-likes', numberLikes);
+                    let numberLikes = parseInt(mediaLikes.getAttribute("data-likes")) + 1;
+                    likeCount[i].textContent = numberLikes;
+                    likeCount[i].style.color = '#901C1C';
+                    likeCount[i].style.fontWeight = 500;
+                    likeCount[i].style.fontSize = '24px';
+                    mediaLikes.setAttribute('data-likes', numberLikes);                    
+                    hasClicked = true;
+                }else{
+                    console.log('error');
+                }
             });
         };
     };
 
 // -------------------------------------------------------------------------------
 
-    // Display a lightbox when one of the media is clicked
-    async function lightboxMedia(){
-        const lightbox = document.querySelector(".lightbox");
-        const links = document.querySelectorAll("a");
+    // Display all photographer's media
+    async function displayMediaData(myMedia){
+        const photographGallery = document.querySelector(".photograph-gallery");
+        myMedia.forEach((myMedia) => {
+            const mediaModel = mediaFactory(myMedia);
+            const mediaCardDOM = mediaModel.getMediasCardDOM();
+            photographGallery.appendChild(mediaCardDOM);
+        });
 
-        for(let link of links){
-            link.addEventListener("click", function(e){
-                e.preventDefault();
-                lightbox.showModal(); 
-
-                let mediaId = e.target.closest("article").getAttribute("data-id");
-                let mediaImg = myMedia.find( m => m.id == mediaId);
+        // Add media event
+        const medias = document.querySelectorAll('a');
+        for(let media of medias){
+            media.addEventListener('click', function(e) {
+                e.preventDefault()
                 
-                const mediaModel = mediaFactory(mediaImg);
-                const mediaCardDOM = mediaModel.lightbox();
-                lightbox.appendChild(mediaCardDOM);
+                function lightbox(){
+                    const lightbox = document.querySelector(".lightbox");
+                    lightbox.showModal(); 
+
+                    let mediaId = e.target.closest("article").getAttribute("data-id");
+                    let mediaImg = myMedia.find( m => m.id == mediaId);
+                
+                    const mediaModel = mediaFactory(mediaImg);
+                    const mediaCardDOM = mediaModel.lightbox();
+                    lightbox.appendChild(mediaCardDOM);
 
                 // ---------------------------------------------------------------
 
-                // Previous/Next button
-                const prevBtn = document.querySelector('.fa-chevron-left');
-                const nextBtn = document.querySelector('.fa-chevron-right');
+                    // Previous button
+                    const prevBtn = document.querySelector('.fa-chevron-left');
+                    const nextBtn = document.querySelector('.fa-chevron-right');
 
-                prevBtn.addEventListener("click", function(e){ 
-                    lightbox.innerHTML = "";
-                    const mediaIndex = myMedia.findIndex((m => m.id == mediaId));
-                    const pressPrev = [mediaIndex -1];
-                    const mediaIndexPrev = myMedia[pressPrev];
+                    prevBtn.addEventListener("click", function(e){
+                        const imgVideo = document.querySelector('.img-video');
+                        imgVideo.innerHTML = "";
+                        const mediaIndex = myMedia.findIndex((m => m.id == mediaId));
+                        const pressNext = [mediaIndex -1];
+                        const mediaIndexNext = myMedia[pressNext];
+                        console.log(mediaId, mediaIndexNext.id);
+                        mediaId = mediaIndexNext.id;
 
-                    const mediaModel = mediaFactory(mediaIndexPrev);
-                    const mediaCardDOM = mediaModel.lightbox();
-                    lightbox.appendChild(mediaCardDOM);                        
-                });
+                        let firstElement = myMedia.shift();
+                        let lastElement = myMedia.pop();
                 
-                nextBtn.addEventListener("click", function(e){ 
-                    const imgVideo = document.querySelector('.img-video');
-                    imgVideo.innerHTML = "";
-                    const mediaIndex = myMedia.findIndex((m => m.id == mediaId));
-                    const pressNext = [mediaIndex +1];
-                    const mediaIndexNext = myMedia[pressNext];
-                    console.log(mediaId, mediaIndexNext.id);
-                    mediaId = mediaIndexNext.id;
+                        const mediaModel = mediaFactory(mediaIndexNext);
+                        const mediaCardDOM = mediaModel.lightboxMedia();
+                        imgVideo.appendChild(mediaCardDOM);                            
+                    });
 
-                    const mediaModel = mediaFactory(mediaIndexNext);
-                    const mediaCardDOM = mediaModel.lightbox();
-                    imgVideo.appendChild(mediaCardDOM);                        
-                });
+                    // Next button
+                    nextBtn.addEventListener("click", function(e){ 
+                        const imgVideo = document.querySelector('.img-video');
+                        imgVideo.innerHTML = "";
+                        const mediaIndex = myMedia.findIndex((m => m.id == mediaId));
+                        const pressNext = [mediaIndex +1];
+                        const mediaIndexNext = myMedia[pressNext];
+                        console.log(mediaId, mediaIndexNext.id);
+                        mediaId = mediaIndexNext.id;
+
+                        let firstElement = myMedia.shift();
+                        let lastElement = myMedia.pop();                      
+
+                        const mediaModel = mediaFactory(mediaIndexNext);
+                        const mediaCardDOM = mediaModel.lightboxMedia();
+                        imgVideo.appendChild(mediaCardDOM);                        
+                    });
+                };
+                // Call lightbox function
+                lightbox();
             });
-        };
+        };  
+        // Call likes function
+        likePhoto();
+         
     };
 // -------------------------------------------------------------------------------
-
-    // Display functions in page
+    // Call functions in page
     displayPhotographerData(photographer);
     displayFrameData(photographer);
     displayNameContact(photographer);
     displayMediaData(myMedia);
     filter();
     filterFunction();
-    likePhoto();
-    // lightboxMedia();
 };
 
 init();

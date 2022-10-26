@@ -15,8 +15,9 @@ export function photographerFactory(data) {
     // -------------------------------------------------------------------------
         
         a.setAttribute("href", "/photographer.html"+"?"+`id=${id}`)
+        a.setAttribute("aria-label", `${name}`);
         img.setAttribute("src", picture)
-        img.setAttribute("alt", `Photo du photographe ${name}`)
+        img.setAttribute("alt", `${name}`)
         h2.textContent = name;
         h3.textContent = city + ", " + country;
         h4.textContent = tagline;
@@ -54,13 +55,14 @@ export function photographerFactory(data) {
         
         // Section btn
         btn.textContent = "Contactez-moi";
+        btn.setAttribute('aria-label', 'Contact Me');
         btn.setAttribute("class", "contact_button");
         btn.setAttribute("onclick", "displayModal()");
         btn.setAttribute("aria-label", "Envoyer un message");
 
         // Section Img
         img.setAttribute("src", picture);
-        img.setAttribute("alt", `Photo du photographe ${name}`);
+        img.setAttribute("alt", `${name}`);
         
     // -------------------------------------------------------------------------
 

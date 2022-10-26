@@ -10,26 +10,26 @@
   </head>
   <body>
     <header>
-      <img src="assets/images/logo.png" class="logo" alt="Photo de Fisheye"/>
+      <img src="assets/images/logo.png" onclick="homePage()" class="logo" alt="Fisheye Home Page"/>
     </header>
     <main id="main">
-      <div class="photograph-header" aria-label="Présentation du photographe"></div>
-      <div class="photograph-filter" aria-label="Filtrer la galerie photo"></div>
-      <div class="photograph-gallery" aria-label="Galerie photo"></div>
-      <dialog class="lightbox"></dialog>
+      <div class="photograph-header"></div>
+      <div class="photograph-filter"></div>
+      <div class="photograph-gallery"></div>
+      <dialog class="lightbox" aria-label="image closeup view"></dialog>
     </main>
-    <div id="contact_modal" aria-label="Modal de contact">
+    <dialog id="contact_modal">
 			<div class="modal">
 				<header>
           <p class="confirmMsg">Votre message a été envoyé.</p>
           <div class="contactezMoi"></div>
-          <img src="assets/icons/close.svg" onclick="closeModal()" aria-label="Fermer" />
+          <img src="assets/icons/close.svg" aria-label="Close Contact form" onclick="closeModal()"/>
         </header>
 				<form>
 					<div class="formData">
 	          <label>Prénom</label>
 						<input 
-            aria-label="Entrer votre prénom ici"
+            aria-label="First name"
             class="text-control"
             type="firstName"
             id="first"
@@ -38,7 +38,7 @@
           <div class="formData">
             <label>Nom</label>
 						<input 
-            aria-label="Entrer votre nom ici"
+            aria-label="Last name"
             class="text-control"
             type="lastName"
             id="last"
@@ -47,7 +47,7 @@
           <div class="formData"> 
             <label>Email</label>
 						<input 
-            aria-label="Entrer votre email ici"
+            aria-label="Email"
             class="text-control"
             type="email"
             id="email"
@@ -56,17 +56,19 @@
           <div class="formData">
             <label>Votre message</label>
 						<input 
+            aria-label="Your message"
             class="text-control yourMessageInput"
             type="textarea"
             id="yourMessage"
             name="message" />
 					</div>
-          <button class="contact_button" id="send-button" aria-label="Envoyer">Envoyer</button>
+          <button class="contact_button" id="send-button" aria-label="Send" >Envoyer</button>
 				</form>
 			</div>
-		</div>
+		</dialog>
     <script src="/scripts/pages/photographer.js" type="module"></script>
     <script src="/scripts/utils/lightbox.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
+    <script src="/scripts/utils/home-page.js"></script>
   </body>
 </html>
