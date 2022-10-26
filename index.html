@@ -9,12 +9,13 @@
   </head>
   <body>
     <header aria-label="En-tête de Fisheye">
-        <img src="assets/images/logo.png" class="logo" alt="Logo de Fisheye"/>
+        <img src="assets/images/logo.png" onclick="homePage()" class="logo" alt="Fisheye Home Page"/>
         <h1>Nos photographes</h1>
     </header>
-    <main id="main" aria-label="Page de navigation principale">
-        <div class="photographer_section" aria-label="Liste des photographes"></div>
+    <main id="main">
+        <div class="photographer_section"></div>
     </main>
     <script src="scripts/pages/index.js" type="module"></script>
+    <script src="scripts/utils/home-page.js"></script>
   </body>
 </html>

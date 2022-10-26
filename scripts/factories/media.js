@@ -3,6 +3,7 @@ export function mediaFactory(data) {
     const picture = `assets/images/${image}`;
     const playVideo = `assets/images/${video}`
 
+// DISPLAY MEDIA CARD
     function getMediasCardDOM(){
         const article = document.createElement( "article" );
         const div = document.createElement( "div" );
@@ -14,15 +15,18 @@ export function mediaFactory(data) {
 
     // -------------------------------------------------------------------------
 
-        // All card
+    // Card
         article.setAttribute("class", "article-photo");
         article.setAttribute("data-id", id)
         article.setAttribute("data-likes", likes)
 
+    // Display image or video
         if(image){
             const img = document.createElement( "img" );
             a.setAttribute("href", picture);
+            a.setAttribute("aria-label", `${title} closeup view`)
             img.setAttribute("src", picture);
+            img.setAttribute("alt", `${title}`)
             a.appendChild(img);
         }else{
             const video = document.createElement( "video" );
@@ -31,14 +35,18 @@ export function mediaFactory(data) {
             a.appendChild(video);
         }
 
-        // Photo info
+    // Photo info
         div.setAttribute('class', 'infoMedia');
         p.textContent = title;
         div1.setAttribute('class', 'div__likes')
+        div1.setAttribute('aria-label', 'likes')
         p1.setAttribute('class', 'likes');
         p1.textContent = likes;
         i.setAttribute('class', 'fas fa-heart');
+
     // -------------------------------------------------------------------------
+
+    // Display card
         article.appendChild(a);
         article.appendChild(div);
         div.appendChild(p); 
@@ -48,7 +56,7 @@ export function mediaFactory(data) {
         return (article);
     }
 
-    // Display lightbox
+// DISPLAY LIGHTBOX
     function lightbox() {
         const article = document.createElement( 'article' );
         const div = document.createElement( 'div' );
@@ -56,16 +64,67 @@ export function mediaFactory(data) {
         const close = document.createElement( 'i' );
         const prev = document.createElement( 'i' );
         const next = document.createElement( 'i' );
+        const h2 = document.createElement( 'h2' );
 
     // -------------------------------------------------------------------------
 
+    // Lightbox
         article.setAttribute('class', 'slide');
+
+    // Close button
         close.setAttribute('class', 'fas fa-times');
         close.setAttribute('onclick', 'closeLightbox()');
-        div.setAttribute('class', 'align__icon');
-        prev.setAttribute('class', 'fas fa-chevron-left');
-        divImgVideo.setAttribute('class', 'img-video');
+        close.setAttribute('aria-label', 'Close dialog');
 
+    // Icon div
+        div.setAttribute('class', 'align__icon');
+
+    // Prev button
+        prev.setAttribute('class', 'fas fa-chevron-left');
+        prev.setAttribute('aria-label', 'Previous image');
+
+    // Display image or video
+        divImgVideo.setAttribute('class', 'img-video');
+        if(image){
+            const img = document.createElement( "img" );
+            img.setAttribute("src", picture);
+            img.setAttribute("alt", `${title}`);
+            divImgVideo.appendChild(img);
+        }else{
+            const video = document.createElement( "video" );
+            video.setAttribute("src", playVideo);
+            video.setAttribute("alt", `${title}`);
+            divImgVideo.appendChild(video);
+        }
+
+    // Next button
+        next.setAttribute('class', 'fas fa-chevron-right');
+        next.setAttribute('aria-label', 'Next image');
+
+    // Media title
+        h2.textContent = title;
+
+    // -------------------------------------------------------------------------
+
+        article.appendChild(close);
+        article.appendChild(div);
+        div.appendChild(prev);
+        div.appendChild(divImgVideo);
+        divImgVideo.appendChild(h2);
+        div.appendChild(next);
+
+        return(article)
+    }
+
+// CHANGE MEDIA TO PREV/NEXT
+    function lightboxMedia() {
+        const divImgVideo = document.createElement( 'div' );
+        const h2 = document.createElement( 'h2' );
+    
+    // -------------------------------------------------------------------------
+
+    // Display image or video
+        divImgVideo.setAttribute('class', 'img-video');
         if(image){
             const img = document.createElement( "img" );
             img.setAttribute("src", picture);
@@ -76,18 +135,17 @@ export function mediaFactory(data) {
             divImgVideo.appendChild(video);
         }
 
-        next.setAttribute('class', 'fas fa-chevron-right');
+    // Media title
+        h2.textContent = title;
 
     // -------------------------------------------------------------------------
 
-        article.appendChild(close);
-        article.appendChild(div);
-        div.appendChild(prev);
-        div.appendChild(divImgVideo);
-        div.appendChild(next);
-        return(article)
-    }
+        divImgVideo.appendChild(h2);
 
+        return(divImgVideo);
+    }  
+
+// FILTER BUTTON
     function filterBtn() {
         const p = document.createElement( 'p' );
         const div = document.createElement( 'div' );
@@ -106,27 +164,35 @@ export function mediaFactory(data) {
         
     // -------------------------------------------------------------------------
 
+    // Button
         p.textContent = "Trier par";
         div.setAttribute('class', 'div-all');
-        divBtnTxt.setAttribute('class', 'div-btn-txt'); 
+        divBtnTxt.setAttribute('class', 'div-btn-txt');
+        divBtnTxt.setAttribute('aria-label', 'Order by'); 
 
+    // Not filter medias
         title.textContent = "Toutes les photos";
         title.setAttribute('class', 'title-all')
 
+    // Popularity medias
         divBtn.setAttribute('class', 'filter-btn');
         popularityBtn.textContent = "Popularité";
         popularityBtn.setAttribute('class', 'popularity-btn');
 
+    // Date medias
         dateBtn.textContent = "Date";
         dateBtn.setAttribute('class', 'date-btn');
 
+    // Title medias
         titleBtn.textContent = "Titre";
         titleBtn.setAttribute('class', 'title-btn');
 
-        iconDown.setAttribute('class', 'fas fa-chevron-down');
-        iconUp.setAttribute('class', 'fas fa-chevron-up');
+    // Icons
         divIcon.setAttribute('class', 'divIcon');
         divIconBtn.setAttribute('class', 'divIconBtn');
+        iconDown.setAttribute('class', 'fas fa-chevron-down');
+        iconUp.setAttribute('class', 'fas fa-chevron-up');
+        
     // ------------------------------------------------------------------------- 
 
         div.appendChild(p);
@@ -146,5 +212,5 @@ export function mediaFactory(data) {
         return(div);
     }
 
-    return { image, video, title, likes, date, id, getMediasCardDOM, lightbox, filterBtn }
+    return { image, video, title, likes, date, id, getMediasCardDOM, lightbox, lightboxMedia, filterBtn }
 };
