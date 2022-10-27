@@ -73,7 +73,6 @@ export function mediaFactory(data) {
 
     // Close button
         close.setAttribute('class', 'fas fa-times');
-        close.setAttribute('onclick', 'closeLightbox()');
         close.setAttribute('aria-label', 'Close dialog');
 
     // Icon div
@@ -94,7 +93,16 @@ export function mediaFactory(data) {
             const video = document.createElement( "video" );
             video.setAttribute("src", playVideo);
             video.setAttribute("alt", `${title}`);
+
+            const divPlay = document.createElement( 'div' );
+            const i = document.createElement( 'i' );
+
+            divPlay.setAttribute('class', 'playVideo');
+            i.setAttribute('class', 'fas fa-play')
+
             divImgVideo.appendChild(video);
+            divImgVideo.appendChild(divPlay);
+            divPlay.append(i)
         }
 
     // Next button

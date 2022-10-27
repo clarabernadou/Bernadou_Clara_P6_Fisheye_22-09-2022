@@ -126,7 +126,7 @@ async function init(){
         for (let i = 0; i < likeBtn.length; i++) {
             let hasClicked = false;
             likeBtn[i].addEventListener("click", function(e) {
-                if(!hasClicked){
+                if(!hasClicked){ // Like
                     let mediaId = e.target.closest("article").getAttribute("data-id");
                     let media = myMedia.find( m => m.id == mediaId);
                     let mediaLikes = e.target.closest("article")
@@ -139,8 +139,19 @@ async function init(){
                     likeCount[i].style.fontSize = '24px';
                     mediaLikes.setAttribute('data-likes', numberLikes);                    
                     hasClicked = true;
-                }else{
-                    console.log('error');
+                }else{ // Dislike
+                    let mediaId = e.target.closest("article").getAttribute("data-id");
+                    let media = myMedia.find( m => m.id == mediaId);
+                    let mediaLikes = e.target.closest("article")
+                    console.log(mediaLikes)
+
+                    let numberLikes = parseInt(mediaLikes.getAttribute("data-likes")) - 1;
+                    likeCount[i].textContent = numberLikes;
+                    likeCount[i].style.color = 'black';
+                    likeCount[i].style.fontWeight = 400;
+                    likeCount[i].style.fontSize = '16px';
+                    mediaLikes.setAttribute('data-likes', numberLikes);                    
+                    hasClicked = false;
                 }
             });
         };
@@ -163,6 +174,7 @@ async function init(){
             media.addEventListener('click', function(e) {
                 e.preventDefault()
                 
+                // Lightbox
                 function lightbox(){
                     const lightbox = document.querySelector(".lightbox");
                     lightbox.showModal(); 
@@ -178,50 +190,81 @@ async function init(){
 
                     // Previous button
                     const prevBtn = document.querySelector('.fa-chevron-left');
-                    const nextBtn = document.querySelector('.fa-chevron-right');
 
                     prevBtn.addEventListener("click", function(e){
                         const imgVideo = document.querySelector('.img-video');
                         imgVideo.innerHTML = "";
                         const mediaIndex = myMedia.findIndex((m => m.id == mediaId));
-                        const pressNext = [mediaIndex -1];
+                        const pressNext = [mediaIndex - 1];
                         const mediaIndexNext = myMedia[pressNext];
                         console.log(mediaId, mediaIndexNext.id);
                         mediaId = mediaIndexNext.id;
-
-                        let firstElement = myMedia.shift();
-                        let lastElement = myMedia.pop();
                 
                         const mediaModel = mediaFactory(mediaIndexNext);
                         const mediaCardDOM = mediaModel.lightboxMedia();
-                        imgVideo.appendChild(mediaCardDOM);                            
+                        imgVideo.appendChild(mediaCardDOM);  
                     });
 
                     // Next button
+                    const nextBtn = document.querySelector('.fa-chevron-right');
+
                     nextBtn.addEventListener("click", function(e){ 
                         const imgVideo = document.querySelector('.img-video');
                         imgVideo.innerHTML = "";
                         const mediaIndex = myMedia.findIndex((m => m.id == mediaId));
-                        const pressNext = [mediaIndex +1];
+                        const pressNext = [mediaIndex + 1];
                         const mediaIndexNext = myMedia[pressNext];
                         console.log(mediaId, mediaIndexNext.id);
                         mediaId = mediaIndexNext.id;
-
-                        let firstElement = myMedia.shift();
-                        let lastElement = myMedia.pop();                      
 
                         const mediaModel = mediaFactory(mediaIndexNext);
                         const mediaCardDOM = mediaModel.lightboxMedia();
                         imgVideo.appendChild(mediaCardDOM);                        
                     });
+
+                // ---------------------------------------------------------------
+
+                    // For each video...
+                    const videos = document.querySelectorAll('.img-video video');
+                    const playVideo = document.querySelector('.fa-play');
+                    const playBg = document.querySelector('.playVideo')
+
+                    for(let v = 0; v < videos.length; v++){
+                        // Play video
+                        playVideo.addEventListener('click', function(e){
+                            videos[v].play(); 
+                            playVideo.style.display = 'none'; 
+                            playBg.style.display = 'none'                         
+                        });
+
+                        // Pause video
+                        videos[v].addEventListener('click', function(e){
+                            videos[v].pause();
+                            playVideo.style.display = 'flex';
+                            playBg.style.display = 'flex'; 
+                        });
+                    }
+
+                // ---------------------------------------------------------------
+
+                    // Close button
+                    const closeBtn = document.querySelectorAll('.fa-times');
+
+                    for(let close of closeBtn){
+                        close.addEventListener('click', function(e){
+                            const lightbox = document.querySelector('.lightbox');  
+                            lightbox.innerHTML = "";
+                            lightbox.close();
+                        });                        
+                    };
+
+                // ---------------------------------------------------------------
+
                 };
-                // Call lightbox function
                 lightbox();
             });
         };  
-        // Call likes function
-        likePhoto();
-         
+        likePhoto();   
     };
 // -------------------------------------------------------------------------------
     // Call functions in page
