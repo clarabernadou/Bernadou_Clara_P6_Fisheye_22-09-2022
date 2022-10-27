@@ -129,16 +129,18 @@
     transition: 0.3s;
     height: 1em;
   }
-  .formData[data-error-visible="true"]::after {
-    opacity: 1;
-  }
-  .formData[data-error-visible="true"] .text-control {
-    border: 3px solid #901C1C;
-  }
 
-  .confirmMsg {
-      font-size: 36px;
-  }
+.formData[data-error-visible="true"]::after {
+    opacity: 1;
+}
+  
+.formData[data-error-visible="true"] .text-control {
+    border: 3px solid #901C1C;
+}
+
+.confirmMsg {
+    font-size: 36px;
+}
 
 .contact_button {
     font-size: 20px;
@@ -159,12 +161,10 @@
     align-items: center;
     justify-content: space-between;
     border-radius: 5px;
-    width: 580px;
+    width: 500px;
     background-color: #DB8876;
     padding: 15px 35px 38px 35px;
     margin: auto;
-    margin-top: 3.5em;
-    margin-bottom: 5em;
     -webkit-box-shadow: 5px 5px 18px 1px rgba(0,0,0,0.34); 
     box-shadow: 5px 5px 18px 1px rgba(0,0,0,0.34);
 }
@@ -181,7 +181,7 @@
 }
 
 .modal header h2 {
-    font-size: 60px;
+    font-size: 50px;
     font-weight: normal;
     margin: 0;
     width: 9em;
@@ -196,7 +196,7 @@ form {
 
 form label {
     color: #312E2E;
-    font-size: 36px;
+    font-size: 26px;
 }
 
 form div {
@@ -204,12 +204,19 @@ form div {
     flex-direction: column;
     width: 100%;
     align-items: self-start;
-    margin-bottom: 26px;
+    margin-bottom: 15px;
 }
 
 form input {
     width: 100%;
     height: 55px;
+    border: none;
+    border-radius: 5px;
+}
+
+form textarea {
+    width: 100%;
+    height: 120px;
     border: none;
     border-radius: 5px;
 }
@@ -349,6 +356,23 @@ article p {
     width: 100%;
 }
 
+.playVideo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20em;
+    height: 14em;
+    background: black;
+    opacity: 0.5;
+    position: fixed;
+    top: 2.4em;
+}
+
+.fa-play{
+    color: white;
+    margin: 0;
+}
+
 @media screen and (max-width: 1170px){
     .lightbox img {
         width: 16em;
@@ -357,6 +381,10 @@ article p {
     .lightbox video {
         width: 16em;
     } 
+
+    .playVideo {
+        width: 16em;
+    }
 }
 
 /* FILTER */
