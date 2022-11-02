@@ -124,55 +124,77 @@ async function init(){
         const likeCount = document.querySelectorAll('.likes');
         const totalLikeCount = document.querySelector('.totalLikes');
 
-
-        // Total likes
+        // Total likes array
         let likesArray = [];
-        
+
+        // Add all image likes in array
         likeCount.forEach((e) => {
             likesArray.push(parseInt(e.firstChild.data));
         });
 
+        // Cumulate all array elements
         const totalLikes = likesArray.reduce((a, b) => {
             return a + b;
         });
         
-        totalLikeCount.textContent = totalLikes;            
+        // Add likes in HTML
+        totalLikeCount.textContent = totalLikes;
+
+        // Add 1 in total likes
+        function addLikeInTotal(){
+            likesArray.push(1);
+            
+            const totalLikes = likesArray.reduce((a, b) => {
+                return a + b;
+            });
+
+            totalLikeCount.textContent = totalLikes;
+        }
+
+        // Remove 1 in total likes
+        function removeLikeInTotal(){
+            likesArray.pop();
+            
+            const totalLikes = likesArray.reduce((a, b) => {
+                return a + b;
+            });
+
+            totalLikeCount.textContent = totalLikes;
+        }
 
         // Like photo
         for (let i = 0; i < likeBtn.length; i++) {
             let hasClicked = false;
 
             likeBtn[i].addEventListener("click", function(e) {
-                if(!hasClicked){ // Like
+                // Like
+                if(!hasClicked){ 
                     let mediaId = e.target.closest("article").getAttribute("data-id");
                     let media = myMedia.find( m => m.id == mediaId);
                     let mediaLikes = e.target.closest("article")
-                    console.log(mediaLikes)
 
                     let numberLikes = parseInt(mediaLikes.getAttribute("data-likes")) + 1;
                     likeCount[i].textContent = numberLikes;
                     likeCount[i].style.color = '#901C1C';
                     likeCount[i].style.fontWeight = 500;
                     likeCount[i].style.fontSize = '24px';
-                    mediaLikes.setAttribute('data-likes', numberLikes);   
-                    
-                    let likePhotoTotal = parseInt(totalLikes + 1)
-                    console.log(likePhotoTotal);
-                    totalLikeCount.textContent = likePhotoTotal;
-
+                    mediaLikes.setAttribute('data-likes', numberLikes); 
+                    addLikeInTotal()  
                     hasClicked = true;
-                }else{ // Dislike
+
+                // Dislike    
+                }else{ 
                     let mediaId = e.target.closest("article").getAttribute("data-id");
                     let media = myMedia.find( m => m.id == mediaId);
                     let mediaLikes = e.target.closest("article")
-                    console.log(mediaLikes)
 
                     let numberLikes = parseInt(mediaLikes.getAttribute("data-likes")) - 1;
                     likeCount[i].textContent = numberLikes;
                     likeCount[i].style.color = 'black';
                     likeCount[i].style.fontWeight = 400;
                     likeCount[i].style.fontSize = '16px';
-                    mediaLikes.setAttribute('data-likes', numberLikes);                    
+                    mediaLikes.setAttribute('data-likes', numberLikes);  
+                    removeLikeInTotal()                  
                     hasClicked = false;
                 }
             });
