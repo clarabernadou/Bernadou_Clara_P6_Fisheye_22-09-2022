@@ -42,7 +42,6 @@ export function mediaFactory(data) {
         div1.setAttribute('aria-label', 'likes')
         p1.setAttribute('class', 'likes');
         p1.textContent = likes;
-        p1.setAttribute("data-likes", likes);
         i.setAttribute('class', 'fas fa-heart');
 
     // -------------------------------------------------------------------------

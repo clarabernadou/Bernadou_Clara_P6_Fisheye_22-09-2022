@@ -59,7 +59,9 @@
     width: 10em;
     object-fit: cover;
 }
+
 /* GALLERY FILTER */
+
 .photograph-filter {
     margin: 20px 100px;
 }
@@ -109,7 +111,6 @@
 /* FORM CONTACT */
 
 #contact_modal {
-    display: none;
     background: rgba(196, 196, 196, 0.4);;
     position: fixed;
     width: 100%;
