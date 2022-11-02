@@ -16,14 +16,14 @@
       <div class="photograph-header"></div>
       <div class="photograph-filter"></div>
       <div class="photograph-gallery"></div>
-      <dialog class="lightbox" aria-label="image closeup view"></dialog>
+      <dialog class="lightbox" aria-label="image closeup view" role=”dialog” aria-hidden="true"></dialog>
     </main>
-    <dialog id="contact_modal">
+    <dialog id="contact_modal" role=”dialog” aria-hidden="true">
 			<div class="modal">
 				<header>
           <p class="confirmMsg">Votre message a été envoyé.</p>
           <div class="contactezMoi"></div>
-          <img src="assets/icons/close.svg" aria-label="Close Contact form" onclick="closeModal()"/>
+          <img src="assets/icons/close.svg" aria-label="Close Contact form" onclick="closeModal()" />
         </header>
 				<form>
 					<div class="formData">
