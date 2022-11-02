@@ -248,7 +248,16 @@ async function init(){
 
                 function lightbox(){
                     const lightbox = document.querySelector(".lightbox");
+                    const main = document.querySelector('main');
+                    const header = document.querySelector('header');
+
                     lightbox.showModal(); // Show lightbox
+
+                    // Keyboard Navigation & Accessibility
+                    lightbox.setAttribute('aria-hidden', 'false');
+                    main.setAttribute('aria-hidden', 'true');
+                    header.setAttribute('aria-hidden', 'true');
+
                     let mediaId = e.target.closest("article").getAttribute("data-id"); // Retrieve id from article data
                     let mediaImg = myMedia.find( m => m.id == mediaId); // Find media by id
                 
