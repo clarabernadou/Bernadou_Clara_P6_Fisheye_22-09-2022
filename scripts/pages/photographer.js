@@ -122,9 +122,26 @@ async function init(){
     function likePhoto(){
         const likeBtn = document.querySelectorAll(".div__likes");
         const likeCount = document.querySelectorAll('.likes');
+        const totalLikeCount = document.querySelector('.totalLikes');
 
+
+        // Total likes
+        let likesArray = [];
+        
+        likeCount.forEach((e) => {
+            likesArray.push(parseInt(e.firstChild.data));
+        });
+
+        const totalLikes = likesArray.reduce((a, b) => {
+            return a + b;
+        });
+        
+        totalLikeCount.textContent = totalLikes;            
+
+        // Like photo
         for (let i = 0; i < likeBtn.length; i++) {
             let hasClicked = false;
+
             likeBtn[i].addEventListener("click", function(e) {
                 if(!hasClicked){ // Like
                     let mediaId = e.target.closest("article").getAttribute("data-id");
@@ -137,7 +154,12 @@ async function init(){
                     likeCount[i].style.color = '#901C1C';
                     likeCount[i].style.fontWeight = 500;
                     likeCount[i].style.fontSize = '24px';
-                    mediaLikes.setAttribute('data-likes', numberLikes);                    
+                    mediaLikes.setAttribute('data-likes', numberLikes);   
+                    
+                    let likePhotoTotal = parseInt(totalLikes + 1)
+                    console.log(likePhotoTotal);
+                    totalLikeCount.textContent = likePhotoTotal;
+
                     hasClicked = true;
                 }else{ // Dislike
                     let mediaId = e.target.closest("article").getAttribute("data-id");
@@ -188,38 +210,43 @@ async function init(){
 
                 // ---------------------------------------------------------------
 
-                    // Previous button
+                myMedia[myMedia.length -1]
+                
+                    // Previous/Next button
                     const prevBtn = document.querySelector('.fa-chevron-left');
+                    const NextBtn = document.querySelector('.fa-chevron-right');
+                    const imgVideo =  document.querySelector('.img-video');
+                    let currentIndex = myMedia.findIndex((m => m.id == mediaId))
+                    console.log(currentIndex);
+
+                    function displayMediaInLightbox(currentIndex){
+                        const mediaModel = mediaFactory(myMedia[currentIndex]);
+                        const mediaCardDOM = mediaModel.lightboxMedia();
+                        imgVideo.appendChild(mediaCardDOM); 
+                    }
 
                     prevBtn.addEventListener("click", function(e){
-                        const imgVideo = document.querySelector('.img-video');
                         imgVideo.innerHTML = "";
-                        const mediaIndex = myMedia.findIndex((m => m.id == mediaId));
-                        const pressNext = [mediaIndex - 1];
-                        const mediaIndexNext = myMedia[pressNext];
-                        console.log(mediaId, mediaIndexNext.id);
-                        mediaId = mediaIndexNext.id;
-                
-                        const mediaModel = mediaFactory(mediaIndexNext);
-                        const mediaCardDOM = mediaModel.lightboxMedia();
-                        imgVideo.appendChild(mediaCardDOM);  
+                        currentIndex -= 1;
+                        console.log(currentIndex);
+
+                        if(currentIndex < 0){
+                            currentIndex = myMedia.length -1;
+                        }
+                        displayMediaInLightbox(currentIndex);
                     });
 
-                    // Next button
-                    const nextBtn = document.querySelector('.fa-chevron-right');
-
-                    nextBtn.addEventListener("click", function(e){ 
-                        const imgVideo = document.querySelector('.img-video');
+                    NextBtn.addEventListener("click", function(e){
                         imgVideo.innerHTML = "";
-                        const mediaIndex = myMedia.findIndex((m => m.id == mediaId));
-                        const pressNext = [mediaIndex + 1];
-                        const mediaIndexNext = myMedia[pressNext];
-                        console.log(mediaId, mediaIndexNext.id);
-                        mediaId = mediaIndexNext.id;
+                        currentIndex += 1;
+                        console.log(currentIndex);
+                        const lastElement = myMedia.length -1
+                        console.log(lastElement);
 
-                        const mediaModel = mediaFactory(mediaIndexNext);
-                        const mediaCardDOM = mediaModel.lightboxMedia();
-                        imgVideo.appendChild(mediaCardDOM);                        
+                        if(currentIndex > lastElement){
+                            currentIndex = 0;
+                        }
+                        displayMediaInLightbox(currentIndex);
                     });
 
                 // ---------------------------------------------------------------
