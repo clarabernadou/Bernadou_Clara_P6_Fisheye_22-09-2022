@@ -1,4 +1,6 @@
 // DOM elements
+const main = document.querySelector('main');
+const header = document.querySelector('header');
 const modal = document.getElementById("contact_modal");
 const sendBtn = document.getElementById("send-button");
 const form = document.querySelector('form');
@@ -12,14 +14,17 @@ const yourMessage = document.getElementById('yourMessage');
 
 // Open the contact modal
 function displayModal() {   
-	modal.style.display = "block";
+	modal.showModal()
   form.style.display = "block";
   confirmMsg.style.display = "none";
+  modal.setAttribute('aria-hidden', 'false');
+  main.setAttribute('aria-hidden', 'true');
+  header.setAttribute('aria-hidden', 'true');
 }
 
 // close the contact modal
 function closeModal() {    
-    modal.style.display = "none";
+    modal.close()
 }
 
 // launch the confirm message
