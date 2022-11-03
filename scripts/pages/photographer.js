@@ -26,7 +26,7 @@ async function init(){
         photographHeader.appendChild(photographCardDOM);
     };
 
-/* ------------------------------------------------- FRAME INFO ------------------------------------------------- */
+/* ------------------------------------------------------ FRAME INFO ------------------------------------------------------ */
 
     async function displayFrameData(photographer){
         const photographGallery = document.querySelector(".photograph-gallery");
@@ -36,7 +36,7 @@ async function init(){
         photographGallery.appendChild(frameCardDOM);
     };
 
-/* ------------------------------------------------- NAME IN FORM CONTACT ------------------------------------------------- */
+/* -------------------------------------------------- NAME IN FORM CONTACT -------------------------------------------------- */
 
     async function displayNameContact(photographer){
         const contactName = document.querySelector(".contactezMoi");
@@ -69,7 +69,7 @@ async function init(){
         });
     };
 
-/* ----------------------------------------------------- FUNCTION FILTER ----------------------------------------------------- */
+/* ---------------------------------------------------- FUNCTION FILTER ---------------------------------------------------- */
 
     async function filterFunction(){
         const popularityBtn = document.querySelector('.popularity-btn');
@@ -79,7 +79,7 @@ async function init(){
         const icon = document.querySelector('.divIcon i');
         const filterBtn = document.querySelector(".filter-btn");
 
-/* ----------------------------------------------------- POPULARITY FILTER ----------------------------------------------------- */
+/* --------------------------------------------------- POPULARITY FILTER --------------------------------------------------- */
 
         // Add an event to the popularity button on click...
         popularityBtn.addEventListener('click', function(e){
@@ -221,7 +221,7 @@ async function init(){
         };
     };
 
-/* --------------------------------------------------- FUNCTION DISPLAY MEDIAS --------------------------------------------------- */
+/* -------------------------------------------------- FUNCTION DISPLAY MEDIAS -------------------------------------------------- */
 
     async function displayMediaData(myMedia){
         const photographGallery = document.querySelector(".photograph-gallery");
@@ -234,7 +234,7 @@ async function init(){
             photographGallery.appendChild(mediaCardDOM);
         });
 
-/* --------------------------------------------------- ADD EVENT TO MEDIAS --------------------------------------------------- */
+/* -------------------------------------------------- ADD EVENT TO MEDIAS -------------------------------------------------- */
 
         const medias = document.querySelectorAll('a');
 
@@ -266,7 +266,7 @@ async function init(){
                     const mediaCardDOM = mediaModel.lightbox();
                     lightbox.appendChild(mediaCardDOM);
 
-/* ----------------------------------------------- FUNCTION DISPLAY MEDIA IN LIGHTBOX ----------------------------------------------- */
+/* -------------------------------------------- FUNCTION DISPLAY MEDIA IN LIGHTBOX -------------------------------------------- */
 
                     let currentIndex = myMedia.findIndex((m => m.id == mediaId)); // Find index by id
 
@@ -274,10 +274,39 @@ async function init(){
                     function displayMediaInLightbox(currentIndex){
                         const mediaModel = mediaFactory(myMedia[currentIndex]);
                         const mediaCardDOM = mediaModel.lightboxMedia();
-                        imgVideo.appendChild(mediaCardDOM); 
+                        imgVideo.appendChild(mediaCardDOM);
                     }
 
-/* ----------------------------------------------- PREVIOUS MEDIA BUTTON ----------------------------------------------- */
+/* ------------------------------------------------- FUNCTION PLAY / PAUSE VIDEO ------------------------------------------------- */
+
+                    function playVideo(){
+                        const videos = document.querySelectorAll('.img-video video');
+                        const playVideo = document.querySelector('.fa-play');
+                        const playBg = document.querySelector('.playVideo')
+
+                        // Loop to run until no more video
+                        for(let v = 0; v < videos.length; v++){
+                            // Add an event to the playVideo on click...
+                            playVideo.addEventListener('click', function(e){
+                                videos[v].play(); // Play video
+
+                                // Visual changes
+                                playVideo.style.display = 'none'; 
+                                playBg.style.display = 'none'                         
+                            });
+
+                            // Add an event to the video on click...
+                            videos[v].addEventListener('click', function(e){
+                                videos[v].pause(); // Pause video
+
+                                // Visual changes
+                                playVideo.style.display = 'flex';
+                                playBg.style.display = 'flex'; 
+                            });
+                        }
+                    };
+                    
+/* ------------------------------------------------- PREVIOUS MEDIA BUTTON ------------------------------------------------- */
 
                     const prevBtn = document.querySelector('.fa-chevron-left');
                     const imgVideo =  document.querySelector('.img-video');
@@ -294,7 +323,7 @@ async function init(){
                         displayMediaInLightbox(currentIndex);
                     });
 
-/* ----------------------------------------------- NEXT MEDIA BUTTON ----------------------------------------------- */
+/* ------------------------------------------------- NEXT MEDIA BUTTON ------------------------------------------------- */
 
                     const NextBtn = document.querySelector('.fa-chevron-right');
 
@@ -312,32 +341,6 @@ async function init(){
                         displayMediaInLightbox(currentIndex);
                     });
 
-/* ----------------------------------------------- PLAY / PAUSE LIGHTBOX ----------------------------------------------- */
-
-                    const videos = document.querySelectorAll('.img-video video');
-                    const playVideo = document.querySelector('.fa-play');
-                    const playBg = document.querySelector('.playVideo')
-
-                    // Loop to run until no more video
-                    for(let v = 0; v < videos.length; v++){
-                        // Add an event to the playVideo on click...
-                        playVideo.addEventListener('click', function(e){
-                            videos[v].play(); // Play video
-
-                            // Visual changes
-                            playVideo.style.display = 'none'; 
-                            playBg.style.display = 'none'                         
-                        });
-
-                        // Add an event to the video on click...
-                        videos[v].addEventListener('click', function(e){
-                            videos[v].pause(); // Pause video
-
-                            // Visual changes
-                            playVideo.style.display = 'flex';
-                            playBg.style.display = 'flex'; 
-                        });
-                    }
 
 /* --------------------------------------------------- CLOSE LIGHTBOX --------------------------------------------------- */
 
@@ -352,6 +355,11 @@ async function init(){
                             lightbox.close(); // Close lightbox
                         });                        
                     };
+
+/* ------------------------------------------------- CALL ALL FUNCTIONS ------------------------------------------------- */
+
+                    // Call play/pause videos function
+                    playVideo();
                 };
                 // Call lightbox function
                 lightbox();
@@ -360,9 +368,7 @@ async function init(){
         // Call like function
         likePhoto(); 
     };
-
-/* --------------------------------------------------- CALL ALL FUNCTIONS --------------------------------------------------- */
-
+    // Call other functions
     displayPhotographerData(photographer);
     displayFrameData(photographer);
     displayNameContact(photographer);
