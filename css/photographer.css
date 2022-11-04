@@ -312,7 +312,7 @@ article p {
 }
 
 .slide {
-    margin: 1em 0;
+    margin: 0;
 }
 
 .align__icon {
@@ -366,7 +366,7 @@ article p {
     background: black;
     opacity: 0.5;
     position: fixed;
-    top: 2.4em;
+    top: 1.4em;
 }
 
 .fa-play{
