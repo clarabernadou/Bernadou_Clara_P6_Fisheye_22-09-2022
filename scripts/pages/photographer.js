@@ -26,7 +26,7 @@ async function init(){
         photographHeader.appendChild(photographCardDOM);
     };
 
-/* ------------------------------------------------- FRAME INFO ------------------------------------------------- */
+/* ------------------------------------------------------ FRAME INFO ------------------------------------------------------ */
 
     async function displayFrameData(photographer){
         const photographGallery = document.querySelector(".photograph-gallery");
@@ -36,7 +36,7 @@ async function init(){
         photographGallery.appendChild(frameCardDOM);
     };
 
-/* ------------------------------------------------- NAME IN FORM CONTACT ------------------------------------------------- */
+/* -------------------------------------------------- NAME IN FORM CONTACT -------------------------------------------------- */
 
     async function displayNameContact(photographer){
         const contactName = document.querySelector(".contactezMoi");
@@ -69,7 +69,7 @@ async function init(){
         });
     };
 
-/* ----------------------------------------------------- FUNCTION FILTER ----------------------------------------------------- */
+/* ---------------------------------------------------- FUNCTION FILTER ---------------------------------------------------- */
 
     async function filterFunction(){
         const popularityBtn = document.querySelector('.popularity-btn');
@@ -79,7 +79,7 @@ async function init(){
         const icon = document.querySelector('.divIcon i');
         const filterBtn = document.querySelector(".filter-btn");
 
-/* ----------------------------------------------------- POPULARITY FILTER ----------------------------------------------------- */
+/* --------------------------------------------------- POPULARITY FILTER --------------------------------------------------- */
 
         // Add an event to the popularity button on click...
         popularityBtn.addEventListener('click', function(e){
@@ -221,7 +221,7 @@ async function init(){
         };
     };
 
-/* --------------------------------------------------- FUNCTION DISPLAY MEDIAS --------------------------------------------------- */
+/* -------------------------------------------------- FUNCTION DISPLAY MEDIAS -------------------------------------------------- */
 
     async function displayMediaData(myMedia){
         const photographGallery = document.querySelector(".photograph-gallery");
@@ -234,7 +234,7 @@ async function init(){
             photographGallery.appendChild(mediaCardDOM);
         });
 
-/* --------------------------------------------------- ADD EVENT TO MEDIAS --------------------------------------------------- */
+/* -------------------------------------------------- ADD EVENT TO MEDIAS -------------------------------------------------- */
 
         const medias = document.querySelectorAll('a');
 
@@ -266,7 +266,7 @@ async function init(){
                     const mediaCardDOM = mediaModel.lightbox();
                     lightbox.appendChild(mediaCardDOM);
 
-/* ----------------------------------------------- FUNCTION DISPLAY MEDIA IN LIGHTBOX ----------------------------------------------- */
+/* -------------------------------------------- FUNCTION DISPLAY MEDIA IN LIGHTBOX -------------------------------------------- */
 
                     let currentIndex = myMedia.findIndex((m => m.id == mediaId)); // Find index by id
 
@@ -274,84 +274,130 @@ async function init(){
                     function displayMediaInLightbox(currentIndex){
                         const mediaModel = mediaFactory(myMedia[currentIndex]);
                         const mediaCardDOM = mediaModel.lightboxMedia();
-                        imgVideo.appendChild(mediaCardDOM); 
+                        imgVideo.appendChild(mediaCardDOM);
                     }
 
-/* ----------------------------------------------- PREVIOUS MEDIA BUTTON ----------------------------------------------- */
+/* ------------------------------------------------- FUNCTION PLAY / PAUSE VIDEO ------------------------------------------------- */
 
-                    const prevBtn = document.querySelector('.fa-chevron-left');
+                    function playVideo(){
+                        const videos = document.querySelectorAll('.img-video video');
+                        const playVideo = document.querySelector('.fa-play');
+                        const playBg = document.querySelector('.playVideo')
+
+                        // Loop to run until no more video
+                        for(let v = 0; v < videos.length; v++){
+                            // Add an event to the playVideo on click...
+                            playVideo.addEventListener('click', function(e){
+                                videos[v].play(); // Play video
+
+                                // Visual changes
+                                playVideo.style.display = 'none'; 
+                                playBg.style.display = 'none'                         
+                            });
+
+                            // Add an event to the video on click...
+                            videos[v].addEventListener('click', function(e){
+                                videos[v].pause(); // Pause video
+
+                                // Visual changes
+                                playVideo.style.display = 'flex';
+                                playBg.style.display = 'flex'; 
+                            });
+                        }
+                    };
+                    
+/* ------------------------------------------------- PREVIOUS MEDIA BUTTON ------------------------------------------------- */
+                    
                     const imgVideo =  document.querySelector('.img-video');
 
-                    // Add an event to the prev button on click...
-                    prevBtn.addEventListener("click", function(e){
-                        imgVideo.innerHTML = ""; // Reset media div
-                        currentIndex -= 1; // Remove 1 to index
+                    function prev(){
+                        const prevBtn = document.querySelector('.fa-chevron-left');
+                        // Add an event to the prev button on click...
+                        prevBtn.addEventListener("click", function(e){
+                            imgVideo.innerHTML = ""; // Reset media div
+                            currentIndex -= 1; // Remove 1 to index
 
-                        // If the current index is less than 0
-                        if(currentIndex < 0){
-                            currentIndex = myMedia.length -1; // currentIndex = the index of the last element
-                        }
-                        displayMediaInLightbox(currentIndex);
-                    });
+                            // If the current index is less than 0
+                            if(currentIndex < 0){
+                                currentIndex = myMedia.length -1; // currentIndex = the index of the last element
+                            }
+                            displayMediaInLightbox(currentIndex);
+                        });                        
+                    }
 
-/* ----------------------------------------------- NEXT MEDIA BUTTON ----------------------------------------------- */
+/* ------------------------------------------------- NEXT MEDIA BUTTON ------------------------------------------------- */
 
-                    const NextBtn = document.querySelector('.fa-chevron-right');
+                    function next(){
+                        const NextBtn = document.querySelector('.fa-chevron-right');
+                        // Add an event to the next button on click...
+                        NextBtn.addEventListener("click", function(e){
+                            imgVideo.innerHTML = ""; // Reset media div
+                            currentIndex += 1; // Add 1 to index
 
-                    // Add an event to the next button on click...
-                    NextBtn.addEventListener("click", function(e){
-                        imgVideo.innerHTML = ""; // Reset media div
-                        currentIndex += 1; // Add 1 to index
-
-                        const lastElement = myMedia.length -1 // Get last item
-                        
-                        // If number of the last element is bigger than the current index
-                        if(currentIndex > lastElement){
-                            currentIndex = 0; // currentIndex = the index of the first element
-                        }
-                        displayMediaInLightbox(currentIndex);
-                    });
-
-/* ----------------------------------------------- PLAY / PAUSE LIGHTBOX ----------------------------------------------- */
-
-                    const videos = document.querySelectorAll('.img-video video');
-                    const playVideo = document.querySelector('.fa-play');
-                    const playBg = document.querySelector('.playVideo')
-
-                    // Loop to run until no more video
-                    for(let v = 0; v < videos.length; v++){
-                        // Add an event to the playVideo on click...
-                        playVideo.addEventListener('click', function(e){
-                            videos[v].play(); // Play video
-
-                            // Visual changes
-                            playVideo.style.display = 'none'; 
-                            playBg.style.display = 'none'                         
-                        });
-
-                        // Add an event to the video on click...
-                        videos[v].addEventListener('click', function(e){
-                            videos[v].pause(); // Pause video
-
-                            // Visual changes
-                            playVideo.style.display = 'flex';
-                            playBg.style.display = 'flex'; 
-                        });
+                            const lastElement = myMedia.length -1 // Get last item
+                            
+                            // If number of the last element is bigger than the current index
+                            if(currentIndex > lastElement){
+                                currentIndex = 0; // currentIndex = the index of the first element
+                            }
+                            displayMediaInLightbox(currentIndex);
+                        });                        
                     }
 
 /* --------------------------------------------------- CLOSE LIGHTBOX --------------------------------------------------- */
 
-                    const closeBtn = document.querySelectorAll('.fa-times');
-                    
-                    // Loop to have the close button of the lightbox
-                    for(let close of closeBtn){ 
-                        // Add an event by clicking on the button
-                        close.addEventListener('click', function(e){
-                            const lightbox = document.querySelector('.lightbox');  
-                            lightbox.innerHTML = ""; // Reset lightbox
-                            lightbox.close(); // Close lightbox
-                        });                        
-                    };
+                    function closeLightbox(){
+                        const closeBtn = document.querySelectorAll('.fa-times');
+                        // Loop to have the close button of the lightbox
+                        for(let close of closeBtn){ 
+                            // Add an event by clicking on the button
+                            close.addEventListener('click', function(e){
+                                const lightbox = document.querySelector('.lightbox');  
+                                lightbox.innerHTML = ""; // Reset lightbox
+                                lightbox.close(); // Close lightbox
+                                window.location.reload(); // Reload page
+                            });                        
+                        };                        
+                    }
+
+/* ------------------------------------------------- LIGHTBOX NAVIGATION ------------------------------------------------- */
+
+                    function lightboxArrowNav(){
+                        document.onkeydown = (e) => {
+                            e = e || window.event;
+                            // Previous navigation
+                            if (e.keyCode == '37') {
+                                imgVideo.innerHTML = "";
+                                currentIndex -= 1;
+                                if(currentIndex < 0){ currentIndex = myMedia.length -1; }
+                                displayMediaInLightbox(currentIndex);
+                            }
+                            // Next navigation
+                            if (e.keyCode == '39') {
+                                imgVideo.innerHTML = "";
+                                currentIndex += 1;
+                                const lastElement = myMedia.length -1;
+                                if(currentIndex > lastElement){ currentIndex = 0; }
+                                displayMediaInLightbox(currentIndex);
+                            }
+                            if(e.keyCode == '27'){
+                                const lightbox = document.querySelector('.lightbox');  
+                                lightbox.innerHTML = "";
+                                lightbox.close(); 
+                                window.location.reload()                           
+                            }
+                            else return false
+                        };                        
+                    }
+
+/* ------------------------------------------------- CALL ALL FUNCTIONS ------------------------------------------------- */
+
+                    // Call functions
+                    playVideo();
+                    next();
+                    prev();
+                    closeLightbox();
+                    lightboxArrowNav();
                 };
                 // Call lightbox function
                 lightbox();
@@ -360,9 +406,7 @@ async function init(){
         // Call like function
         likePhoto(); 
     };
-
-/* --------------------------------------------------- CALL ALL FUNCTIONS --------------------------------------------------- */
-
+    // Call other functions
     displayPhotographerData(photographer);
     displayFrameData(photographer);
     displayNameContact(photographer);
