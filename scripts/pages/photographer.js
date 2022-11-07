@@ -326,7 +326,6 @@ async function init(){
                                 const lightbox = document.querySelector('.lightbox');  
                                 lightbox.innerHTML = ""; // Reset lightbox
                                 lightbox.close(); // Close lightbox
-                                window.location.reload(); // Reload page
                             });                        
                         };                        
                     }
@@ -354,8 +353,7 @@ async function init(){
                             if(e.keyCode == '27'){
                                 const lightbox = document.querySelector('.lightbox');  
                                 lightbox.innerHTML = "";
-                                lightbox.close(); 
-                                window.location.reload()                           
+                                lightbox.close();                         
                             }
                             else return false
                         };                        
