@@ -9,7 +9,7 @@ export function mediaFactory(data) {
         const div = document.createElement( "div" );
         const a = document.createElement( "a" );
         const p = document.createElement( "p" );
-        const div1 = document.createElement ( "div" );
+        const div1 = document.createElement ( "button" );
         const p1 = document.createElement( "p" );
         const i = document.createElement( "i" );
 
@@ -93,16 +93,9 @@ export function mediaFactory(data) {
             const video = document.createElement( "video" );
             video.setAttribute("src", playVideo);
             video.setAttribute("alt", `${title}`);
-
-            const divPlay = document.createElement( 'div' );
-            const i = document.createElement( 'i' );
-
-            divPlay.setAttribute('class', 'playVideo');
-            i.setAttribute('class', 'fas fa-play')
-
+            video.toggleAttribute("controls");
+            console.log('create media');
             divImgVideo.appendChild(video);
-            divImgVideo.appendChild(divPlay);
-            divPlay.append(i)
         }
 
     // Next button
@@ -140,6 +133,7 @@ export function mediaFactory(data) {
         }else{
             const video = document.createElement( "video" );
             video.setAttribute("src", playVideo);
+            video.toggleAttribute("controls");
             divImgVideo.appendChild(video);
         }
 
