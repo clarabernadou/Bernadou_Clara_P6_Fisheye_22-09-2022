@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
@@ -16,14 +16,14 @@
       <div class="photograph-header"></div>
       <div class="photograph-filter"></div>
       <div class="photograph-gallery"></div>
-      <dialog class="lightbox" aria-label="image closeup view" role=”dialog” aria-hidden="true"></dialog>
+      <dialog class="lightbox" aria-label="image closeup view" aria-hidden="true"></dialog>
     </main>
-    <dialog id="contact_modal" role=”dialog” aria-hidden="true">
+    <dialog id="contact_modal" aria-hidden="true">
 			<div class="modal">
 				<header>
           <p class="confirmMsg">Votre message a été envoyé.</p>
           <div class="contactezMoi"></div>
-          <img src="assets/icons/close.svg" aria-label="Close Contact form" onclick="closeModal()" />
+          <img src="assets/icons/close.svg" aria-label="Close Contact form" alt="Close contact icon" onclick="closeModal()" />
         </header>
 				<form>
 					<div class="formData">
@@ -31,7 +31,7 @@
 						<input 
             aria-label="First name"
             class="text-control"
-            type="firstName"
+            type="text"
             id="first"
             name="firstName" />
           </div>
@@ -40,7 +40,7 @@
 						<input 
             aria-label="Last name"
             class="text-control"
-            type="lastName"
+            type="text"
             id="last"
             name="lastName" />
           </div>
@@ -58,7 +58,6 @@
 						<textarea 
             aria-label="Your message"
             class="text-control yourMessageInput"
-            type="message"
             id="yourMessage"
             name="message" ></textarea>
 					</div>
