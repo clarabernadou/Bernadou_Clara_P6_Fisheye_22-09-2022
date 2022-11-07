@@ -274,6 +274,8 @@ article p {
     display: flex;
     align-items: center;
     gap: 5px;
+    background: transparent;
+    border: none;
 }
 
 .div__likes p{
@@ -357,18 +359,6 @@ article p {
     width: 100%;
 }
 
-.playVideo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 20em;
-    height: 14em;
-    background: black;
-    opacity: 0.5;
-    position: fixed;
-    top: 1.4em;
-}
-
 .fa-play{
     color: white;
     margin: 0;
@@ -380,10 +370,6 @@ article p {
     }
     
     .lightbox video {
-        width: 16em;
-    } 
-
-    .playVideo {
         width: 16em;
     }
 }
