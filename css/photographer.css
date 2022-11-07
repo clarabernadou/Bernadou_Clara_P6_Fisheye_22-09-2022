@@ -12,13 +12,6 @@
     padding: 3em;
 }
 
-/* media queries */
-@media screen and (max-width: 1005px){
-    .photograph-header aside {
-        flex-direction: column-reverse;
-    }
-}
-/* ---------------------------------------- */
 .photograph-header section {
     margin: 1em;
 }
@@ -116,6 +109,7 @@
     width: 100%;
     height: 100%;
     top: 0;
+    border: none;
 }
 
 .formData[data-error]::after {
@@ -227,8 +221,7 @@ form textarea {
 .photograph-gallery {
     margin: 0 100px;
     display: flex;
-    justify-content: space-around;
-    gap: 4%;
+    justify-content: space-between;
     flex-wrap: wrap;
 }
 
@@ -359,28 +352,12 @@ article p {
     width: 100%;
 }
 
-.fa-play{
-    color: white;
-    margin: 0;
-}
-
-@media screen and (max-width: 1170px){
-    .lightbox img {
-        width: 16em;
-    }
-    
-    .lightbox video {
-        width: 16em;
-    }
-}
-
 /* FILTER */
 
 .div-all {
     display: flex;
     align-items: center;
     gap: 0.5em;
-
 }
 
 .div-btn-txt {
@@ -439,4 +416,100 @@ article p {
 .divIconBtn i{
     color: white;
     margin-left: 1em;
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width: 1257px){
+
+    .logo {
+        height: 30px;
+        margin-left: 50px;
+    }
+
+    /* PHOTOGRAPH HEADER */
+
+    .photograph-header aside {
+        flex-direction: column-reverse;
+        padding: 1em;
+        text-align: center;
+    }
+
+    .photograph-header h2 {
+        font-size: 42px;
+    }
+
+    .photograph-header h4 {
+        text-align: center;
+    }
+
+    .photograph-filter,
+    .photograph-header,
+    .photograph-gallery {
+        width: 90%;
+        margin: 0 5%;
+    }
+
+    .photograph-filter {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    /* CONTACT FORM */
+
+    .modal {
+        width: 70%;
+    }
+
+    .modal header {
+        flex-direction: row;
+    }
+
+    .modal header h2 {
+        font-size: 25px;
+    }
+
+    .modal header img {
+        width: 20px;
+    }
+
+    form label{
+        font-size: 20px;
+    }
+
+    form input {
+        height: 40px;
+    }
+
+    .formData[data-error]::after {
+        font-size: 15px;
+        line-height: 1.3em;
+        margin-top: 5px;
+        margin-bottom: 15px;
+    }
+
+    .contact_button {
+        height: 60px;
+    }
+
+    /* LIGHTBOX */
+
+    .lightbox article {
+        font-size: 1em;
+    }
+
+    .lightbox h2 {
+        font-size: 14px;
+    }
+
+    /* FRAME */
+
+    .frame {
+        width: 16em;
+        height: 5em;
+    }
+
+    .frame p {
+        font-size: 20px;
+    }
 }
