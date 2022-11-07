@@ -29,11 +29,11 @@ async function init(){
 /* ------------------------------------------------------ FRAME INFO ------------------------------------------------------ */
 
     async function displayFrameData(photographer){
-        const photographGallery = document.querySelector(".photograph-gallery");
+        const main = document.querySelector("main");
         // Display likes & price in frame with factories
         const frameModel = photographerFactory(photographer);
         const frameCardDOM = frameModel.getFrameDOM();
-        photographGallery.appendChild(frameCardDOM);
+        main.appendChild(frameCardDOM);
     };
 
 /* -------------------------------------------------- NAME IN FORM CONTACT -------------------------------------------------- */
@@ -276,35 +276,6 @@ async function init(){
                         const mediaCardDOM = mediaModel.lightboxMedia();
                         imgVideo.appendChild(mediaCardDOM);
                     }
-
-/* ------------------------------------------------- FUNCTION PLAY / PAUSE VIDEO ------------------------------------------------- */
-
-                    function playVideo(){
-                        const videos = document.querySelectorAll('.img-video video');
-                        const playVideo = document.querySelector('.fa-play');
-                        const playBg = document.querySelector('.playVideo')
-
-                        // Loop to run until no more video
-                        for(let v = 0; v < videos.length; v++){
-                            // Add an event to the playVideo on click...
-                            playVideo.addEventListener('click', function(e){
-                                videos[v].play(); // Play video
-
-                                // Visual changes
-                                playVideo.style.display = 'none'; 
-                                playBg.style.display = 'none'                         
-                            });
-
-                            // Add an event to the video on click...
-                            videos[v].addEventListener('click', function(e){
-                                videos[v].pause(); // Pause video
-
-                                // Visual changes
-                                playVideo.style.display = 'flex';
-                                playBg.style.display = 'flex'; 
-                            });
-                        }
-                    };
                     
 /* ------------------------------------------------- PREVIOUS MEDIA BUTTON ------------------------------------------------- */
                     
@@ -393,7 +364,6 @@ async function init(){
 /* ------------------------------------------------- CALL ALL FUNCTIONS ------------------------------------------------- */
 
                     // Call functions
-                    playVideo();
                     next();
                     prev();
                     closeLightbox();
@@ -406,6 +376,7 @@ async function init(){
         // Call like function
         likePhoto(); 
     };
+
     // Call other functions
     displayPhotographerData(photographer);
     displayFrameData(photographer);
