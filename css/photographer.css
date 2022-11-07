@@ -221,8 +221,7 @@ form textarea {
 .photograph-gallery {
     margin: 0 100px;
     display: flex;
-    justify-content: space-around;
-    gap: 4%;
+    justify-content: space-between;
     flex-wrap: wrap;
 }
 
@@ -462,8 +461,24 @@ article p {
         width: 70%;
     }
 
+    .modal header {
+        flex-direction: row;
+    }
+
     .modal header h2 {
-        font-size: 30px;
+        font-size: 25px;
+    }
+
+    .modal header img {
+        width: 20px;
+    }
+
+    form label{
+        font-size: 20px;
+    }
+
+    form input {
+        height: 40px;
     }
 
     .formData[data-error]::after {
@@ -471,6 +486,10 @@ article p {
         line-height: 1.3em;
         margin-top: 5px;
         margin-bottom: 15px;
+    }
+
+    .contact_button {
+        height: 60px;
     }
 
     /* LIGHTBOX */
