@@ -129,11 +129,13 @@ export function mediaFactory(data) {
         if(image){
             const img = document.createElement( "img" );
             img.setAttribute("src", picture);
+            img.setAttribute("alt", `${title}`);
             divImgVideo.appendChild(img);
         }else{
             const video = document.createElement( "video" );
             video.setAttribute("src", playVideo);
             video.toggleAttribute("controls");
+            video.setAttribute("alt", `${title}`);
             divImgVideo.appendChild(video);
         }
 
