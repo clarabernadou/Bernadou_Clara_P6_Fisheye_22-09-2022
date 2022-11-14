@@ -326,7 +326,7 @@ async function init(){
                                 const lightbox = document.querySelector('.lightbox');  
                                 lightbox.innerHTML = ""; // Reset lightbox
                                 lightbox.close(); // Close lightbox
-                            });                        
+                            });
                         };                        
                     }
 
