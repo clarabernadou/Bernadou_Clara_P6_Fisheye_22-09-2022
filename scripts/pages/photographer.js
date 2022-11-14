@@ -355,7 +355,6 @@ async function init(){
                                 lightbox.innerHTML = "";
                                 lightbox.close();                         
                             }
-                            else return false
                         };                        
                     }
 
