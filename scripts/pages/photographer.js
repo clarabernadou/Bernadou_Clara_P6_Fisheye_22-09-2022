@@ -14,7 +14,7 @@ async function init(){
     const { photographers, media } = await getPhotographers(); // Recovery data in function
     let photographer = photographers.find(p => p.id == photographerId); // Find a photographer with their id
     myMedia = media.filter(m => m.photographerId == photographerId); // Find all the media of the photographer with the identifier of the photographer
-    
+
 /* ------------------------------------------------- PHOTOGRAPHER'S HEADER ------------------------------------------------- */
 
     // Display a photograph in header
@@ -236,7 +236,7 @@ async function init(){
 
 /* -------------------------------------------------- ADD EVENT TO MEDIAS -------------------------------------------------- */
 
-        const medias = document.querySelectorAll('a');
+        const medias = document.querySelectorAll('.photograph-gallery a');
 
         // Loop to have media of medias
         for(let media of medias){
@@ -386,5 +386,3 @@ async function init(){
 };
 
 init();
-
-
