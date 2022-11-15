@@ -14,7 +14,7 @@ async function init(){
     const { photographers, media } = await getPhotographers(); // Recovery data in function
     let photographer = photographers.find(p => p.id == photographerId); // Find a photographer with their id
     myMedia = media.filter(m => m.photographerId == photographerId); // Find all the media of the photographer with the identifier of the photographer
-
+    
 /* ------------------------------------------------- PHOTOGRAPHER'S HEADER ------------------------------------------------- */
 
     // Display a photograph in header
@@ -259,6 +259,7 @@ async function init(){
                     header.setAttribute('aria-hidden', 'true');
 
                     let mediaId = e.target.closest("article").getAttribute("data-id"); // Retrieve id from article data
+                    console.log(mediaId);
                     let mediaImg = myMedia.find( m => m.id == mediaId); // Find media by id
                 
                     // Display lightbox in page with factories
@@ -336,21 +337,22 @@ async function init(){
                         document.onkeydown = (e) => {
                             e = e || window.event;
                             // Previous navigation
-                            if (e.keyCode == '37') {
+                            console.log(e.key)
+                            if (e.key == 'ArrowLeft') {
                                 imgVideo.innerHTML = "";
                                 currentIndex -= 1;
                                 if(currentIndex < 0){ currentIndex = myMedia.length -1; }
                                 displayMediaInLightbox(currentIndex);
                             }
                             // Next navigation
-                            if (e.keyCode == '39') {
+                            if (e.key == 'ArrowRight') {
                                 imgVideo.innerHTML = "";
                                 currentIndex += 1;
                                 const lastElement = myMedia.length -1;
                                 if(currentIndex > lastElement){ currentIndex = 0; }
                                 displayMediaInLightbox(currentIndex);
                             }
-                            if(e.keyCode == '27'){
+                            if(e.key == 'Echap'){
                                 const lightbox = document.querySelector('.lightbox');  
                                 lightbox.innerHTML = "";
                                 lightbox.close();                         

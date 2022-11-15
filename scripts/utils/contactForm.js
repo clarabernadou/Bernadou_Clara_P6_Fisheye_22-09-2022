@@ -99,7 +99,7 @@ function emailValid(email, message){
 // verify message format
 function yourMessageValid(yourMessage, message){
     const yourMessageInput = yourMessage.value;
-    if(yourMessageInput !== null && yourMessageInput.length >= 1){
+    if(yourMessageInput !== null && yourMessageInput.length >= 10){
         isValid(yourMessage);
         return true;
       }else{

@@ -17,19 +17,20 @@ export function mediaFactory(data) {
 
     // Card
         article.setAttribute("class", "article-photo");
-        article.setAttribute("data-id", id)
-        article.setAttribute("data-likes", likes)
+        article.setAttribute("data-id", id);
+        article.setAttribute("data-likes", likes);
 
     // Display image or video
         if(image){
             const img = document.createElement( "img" );
             a.setAttribute("href", picture);
-            a.setAttribute("aria-label", `${title} closeup view`)
+            a.setAttribute("aria-label", `${title} closeup view`);
             img.setAttribute("src", picture);
-            img.setAttribute("alt", `${title}`)
+            img.setAttribute("alt", `${title}`);
             a.appendChild(img);
         }else{
             const video = document.createElement( "video" );
+            a.setAttribute("aria-label", `${title} closeup view`);
             a.setAttribute("href", playVideo);
             video.setAttribute("src", playVideo);
             a.appendChild(video);
@@ -92,9 +93,7 @@ export function mediaFactory(data) {
         }else{
             const video = document.createElement( "video" );
             video.setAttribute("src", playVideo);
-            video.setAttribute("alt", `${title}`);
             video.toggleAttribute("controls");
-            console.log('create media');
             divImgVideo.appendChild(video);
         }
 
