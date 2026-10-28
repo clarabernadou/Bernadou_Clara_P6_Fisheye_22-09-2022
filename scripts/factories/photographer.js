@@ -14,7 +14,7 @@ export function photographerFactory(data) {
 
     // -------------------------------------------------------------------------
         
-        a.setAttribute("href", "/photographer.html"+"?"+`id=${id}`)
+        a.setAttribute("href", "photographer.html"+"?"+`id=${id}`)
         a.setAttribute("aria-label", `${name}`);
         img.setAttribute("src", picture)
         img.setAttribute("alt", `${name}`)
